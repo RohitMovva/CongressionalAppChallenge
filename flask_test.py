@@ -12,8 +12,15 @@ def hello():
 def greet_user():
     data = request.get_json()
     name = data.get("username", "Guest")
-    print(name + "afdasf")
-    return jsonify({"message": f"Hello, {name}"})
+    print(type(name))
+    # with open('class_list.csv','wb') as file:
+    #     # for line in name:
+    #     file.write(name)
+    #     file.write('\n')
+    f = open('class_list.csv','w')
+    f.write(name)
+    f.close()
+    return jsonify({"message": "Success!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
