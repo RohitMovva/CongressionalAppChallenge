@@ -25,11 +25,7 @@
             const reader = new FileReader();
             reader.onload = function (e) {
                 const text = e.target.result;
-                // document.write(text);
-                console.log(text);
-                console.log("a");
                 datar = text;
-                console.log(typeof datar);
                 fetch(`http://127.0.0.1:5000/api/greet`, {
                     method: 'POST',
                     headers: {
@@ -50,31 +46,7 @@
             };
             console.log(datar);
             reader.readAsText(input);
-            // let username = document.getElementById("csvFile").value;
-            
-
-            
         });
-        // function callAPI() {
-        //     let username = document.getElementById("csvFile").value;
-        //     fetch(`http://127.0.0.1:5000/api/greet`, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             "username": username
-        //         })
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         document.getElementById("response").innerText = data.message;
-        //     })
-        //     .catch(error => {
-        //         console.error("Error fetching data: ", error);
-        //         document.getElementById("response").innerText = "Error fetching data!";
-        //     });
-        // }
     </script>
 </body>
 </html>
