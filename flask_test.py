@@ -12,7 +12,8 @@ def hello():
 def greet_user():
     data = request.get_json()
     name = data.get("username", "Guest")
-    return jsonify({"message": f"Hello, {name}!"})
+    print(name + "afdasf")
+    return jsonify({"message": f"Hello, {name}"})
 
 if __name__ == '__main__':
     app.run(debug=True)
