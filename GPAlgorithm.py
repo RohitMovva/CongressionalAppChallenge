@@ -1,3 +1,5 @@
+import random
+import csv
 
 def score(generation):
     score = 0
