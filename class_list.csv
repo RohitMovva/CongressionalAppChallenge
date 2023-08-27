@@ -1,6 +1,6 @@
 Class Name,Required,Size,Period 1,Period 2,Period 3,Period 4
-English,r,3,1,0,1,0
-Math,r,3,0,1,0,1
-Study Hall,r,3,0,1,0,1
-Band,e,3,1,0,0,0
-Art,e,3,0,0,1,0
+english,r,3,0,-1,0,-1
+math,r,3,-1,0,-1,0
+study hall,r,3,-1,0,-1,0
+band,e,3,0,-1,-1,-1
+art,e,3,-1,-1,0,-1
