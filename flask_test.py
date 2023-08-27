@@ -62,7 +62,7 @@ def greet_user():
     #     # for line in name:
     #     file.write(name)
     #     file.write('\n')
-    f = open('class_list.csv','w', newline='')
+    f = open('class_list.csv','w')
     f.write(name)
     f.close()
     return jsonify({"message": "Success!"})
@@ -70,4 +70,3 @@ def greet_user():
 if __name__ == '__main__':
     solve()
     app.run(debug=True)
-    
