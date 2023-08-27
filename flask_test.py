@@ -58,11 +58,7 @@ def greet_user():
     data = request.get_json()
     name = data.get("username", "Guest")
     print(type(name))
-    # with open('class_list.csv','wb') as file:
-    #     # for line in name:
-    #     file.write(name)
-    #     file.write('\n')
-    f = open('class_list.csv','w')
+    f = open('class_list.csv','w', newline='')
     f.write(name)
     f.close()
     return jsonify({"message": "Success!"})
