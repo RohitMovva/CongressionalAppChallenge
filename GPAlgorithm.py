@@ -21,6 +21,7 @@ def solve():
     student_requests = list(csv.reader(open("student_course_requests.csv")))
     generation_size = 1  # 100
     generations = 1  # 100
+    throw_away_rate = .5
     cross_over_rate = .9
     elitism = .1
     mutation_rate = .05
@@ -43,6 +44,11 @@ def solve():
                         available_periods[l - 2] = False
                         break
 
+    for i in range(0, generations):
+        generation = score(generation)
+        sorted(generation, key=lambda x: x[0]) # fix this later
+        for j in range(0, throw_away_rate*generation_size):
+            pass
     print(generation)
 
 # if __name__ == "main":
