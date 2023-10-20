@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    scroll-snap-type: mandatory;
+    scroll-snap-points-y: repeat(100vh);
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Major Mono Display', monospace;
+    background-color: #F1F0E8;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+header {
+    margin: 0;
+    padding: 5vh;
+    height: 100vh;
+    width: 100vw;
+    font-size: 100vw;
+    background-color: #e04952;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: calc(1rem + 10%);
+    color: #F1F0E8;
+}
+
+ul {
+    list-style-position: inside;
+    margin: auto;
+    width: 80%;
+    text-align: left;
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+}
+
+.stagger {
+    transition-delay: 2s;
+}
+
+.stagger2 {
+    transition-delay: 4s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hidden {
+      transition: opacity, filter, transform 1s;
+    }
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+div.snap {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    text-align: center;
+    position: relative;
+}
