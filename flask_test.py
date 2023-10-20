@@ -10,6 +10,7 @@ def hello():
 
 @app.route('/api/greet', methods=['POST'])
 def greet_user():
+    print("yoo\n")
     data = request.get_json()
     name = data.get("username", "Guest")
     f = open('class_list.csv','w', newline='')

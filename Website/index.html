@@ -48,11 +48,54 @@
             </div>
 
             <div class="snap">
+                <div class="centered">
+                    <h1>Call API</h1>
+                    <form id="myForm">
+                        <input type="file" id="csvFile" accept=".csv" />
+                        <br />
+                        <input type="submit" value="Submit" />
+                        <!-- <input type="text" id="username" placeholder="Enter your name"> -->
+                        <!-- <button onclick="callAPI()">Greet Me</button> -->
+                        <p id="response"></p>
+                </div>
+                <script>
+                    const myForm = document.getElementById("myForm");
+                    const csvFile = document.getElementById("csvFile");
+                    myForm.addEventListener("submit", function (e) {
+                        let datar = "";
+                        e.preventDefault();
+                        const input = csvFile.files[0];
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const text = e.target.result;
+                            datar = text;
+                            fetch(`http://127.0.0.1:5000/api/greet`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    "username": datar
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                document.getElementById("response").innerText = data.message;
+                            })
+                            .catch(error => {
+                                console.error("Error fetching data: ", error);
+                                document.getElementById("response").innerText = "Error fetching data!";
+                            });
+                        };
+                        console.log(datar);
+                        reader.readAsText(input);  
+                    });
+                </script>
                 <section class="form">
                     <p>this is where the form will go woo ima get to that tommorow</p>
                 </section>
             </div>
-
+            
         </main>
 
     </body>
