@@ -21,34 +21,32 @@
             </div>
 
             <div class="snap">
-                <section class="my-class">
-                    <section class="stagger test">
+                <div class="content">
+                    <section class="my-class">
                         <h2>What it is</h2>
                         <p>This is a course rescheduler that you can use to move your courses around. Made by Rohit, Pierce, Alden, and Joshua.</p>
                         <img src="placeholder_parrot1.jfif" alt="green parrot hanging off a tree">
                     </section>
         
-                    <section class="stagger">
+                    <section class="my-class">
                         <h2>What it does</h2>
                         <p>After a masterlist of classes in inputed, the class to be removed, and the class to be added are inputed it returns your new scheduel that will have all the classe you need.</p>
-                        <img src="placeholder_parrot2.jfif" alt="red parrot">
                     </section>
         
-                    <section class="stagger2">
-                        <h2>What it supports</h2>
-                        <p>idk im writing this too late for my brain to work right</p>
-                        <ul>
-                            <li>we probs want a list for thi</li>
-                            <li>hi  hello</li>
-                            <li>greetings salutations</li>
-                            <li>placeholder parrot best parrot</li>
+                    <section class="my-class secondary">
+                        <h2>How to use</h2>
+                        <ul class="row">
+                            <li class="column">Input csv with master list of classes</li>
+                            <li class="column">Input your schedule</li>
+                            <li class="column">Input the class to remove and the class to add</li>
+                            <li class="column">Submit!</li>
                         </ul>
                     </section>
-                </section>
+                </div>
             </div>
-
+ 
             <div class="snap">
-                <div class="centered">
+                <div class="content">
                     <h1>Call API</h1>
                     <form id="myForm">
                         <input type="file" id="csvFile" accept=".csv" />
@@ -58,51 +56,7 @@
                         <!-- <button onclick="callAPI()">Greet Me</button> -->
                         <p id="response"></p>
                 </div>
-                <script>
-                    const myForm = document.getElementById("myForm");
-                    const csvFile = document.getElementById("csvFile");
-                    var classes = [];
-                    myForm.addEventListener("submit", function (e) {
-                        let datar = "";
-                        e.preventDefault();
-                        const input = csvFile.files[0];
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            const text = e.target.result;
-                            datar = text;
-                            fetch(`http://127.0.0.1:5000/api/greet`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    "username": datar
-                                })
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                document.getElementById("response").innerText = data.message;
-                                classes = data.class_list;
-                                // UPDATE THE FORM HERE
-                                let list = document.getElementById("myList");
-                                for (i = 0; i < classes.length; i++) {
-                                    let li = document.createElement('li');
-                                    li.innerText = classes[i];
-                                    console.log(li);
-                                    list.appendChild(li);
-                                }
-                                console.log(classes);
-                            })
-                            .catch(error => {
-                                console.error("Error fetching data: ", error);
-                                document.getElementById("response").innerText = "Error fetching data!";
-                            });
-                        };
-                        console.log(datar);
-                        console.log(classes);
-                        reader.readAsText(input);  
-                    });
-                </script>
+
                 <section class="form">
                     <p>this is where the form will go woo ima get to that tommorow</p>
                     <ul, id="myList"></ul>

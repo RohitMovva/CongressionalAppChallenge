@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 * {
     box-sizing: border-box;
@@ -41,6 +42,7 @@ header {
 h1 {
     text-align: center;
     margin: 0;
+    padding: 0;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -50,25 +52,42 @@ h1 {
     color: #F1F0E8;
 }
 
-ul {
-    list-style-position: inside;
-    margin: auto;
-    width: 80%;
-    text-align: left;
+h2 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
 }
+
+p  {
+    font-family: 'Raleway', sans-serif;
+}
+
+ul {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+li {
+    display: grid;
+    place-items: center;
+    background-color: #e9e8e1;
+    width: 45vw;
+    height: 20vh;
+}
+
+@media screen and (max-width: 600px) {
+    h2, p, ul {
+        font-size: 2.5vw;
+    }
+}
+
 
 .hidden {
     opacity: 0;
     filter: blur(5px);
     transform: translateX(-100%);
-}
-
-.stagger {
-    transition-delay: 2s;
-}
-
-.stagger2 {
-    transition-delay: 4s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -83,6 +102,20 @@ ul {
     transform: translateX(0);
 }
 
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+.column {
+    -ms-flex: 45%;
+    flex: 45%;
+    max-width: 50%;
+    margin: 4px;
+}
+
 div.snap {
     margin: 0;
     padding: 0;
@@ -90,4 +123,11 @@ div.snap {
     scroll-snap-align: start;
     text-align: center;
     position: relative;
+    display: grid;
+    place-items: center;
+}
+
+div.content {
+    margin: 0;
+    padding: 2em;
 }
