@@ -142,6 +142,7 @@ div.content {
   
   .dropdown {
     position: relative;
+    padding: 16px;
     display: inline-block;
   }
   
