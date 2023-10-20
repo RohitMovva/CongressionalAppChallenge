@@ -10,13 +10,20 @@ def hello():
 
 @app.route('/api/greet', methods=['POST'])
 def greet_user():
-    print("yoo\n")
     data = request.get_json()
+    print(type(data))
+    print(data)
     name = data.get("username", "Guest")
+    classes = []
+    for i in name.split("\n")[1:]:
+        print("adding...\n")
+        classes.append(i.split(',')[0])
+    print(classes)
     f = open('class_list.csv','w', newline='')
     f.write(name)
     f.close()
-    return jsonify({"message": "Success!"})
+    # 
+    return jsonify({"message": "Success!", "class_list": classes})
 
 if __name__ == '__main__':
     app.run(debug=True)

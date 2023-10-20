@@ -61,6 +61,7 @@
                 <script>
                     const myForm = document.getElementById("myForm");
                     const csvFile = document.getElementById("csvFile");
+                    var classes = [];
                     myForm.addEventListener("submit", function (e) {
                         let datar = "";
                         e.preventDefault();
@@ -81,6 +82,16 @@
                             .then(response => response.json())
                             .then(data => {
                                 document.getElementById("response").innerText = data.message;
+                                classes = data.class_list;
+                                // UPDATE THE FORM HERE
+                                let list = document.getElementById("myList");
+                                for (i = 0; i < classes.length; i++) {
+                                    let li = document.createElement('li');
+                                    li.innerText = classes[i];
+                                    console.log(li);
+                                    list.appendChild(li);
+                                }
+                                console.log(classes);
                             })
                             .catch(error => {
                                 console.error("Error fetching data: ", error);
@@ -88,11 +99,13 @@
                             });
                         };
                         console.log(datar);
+                        console.log(classes);
                         reader.readAsText(input);  
                     });
                 </script>
                 <section class="form">
                     <p>this is where the form will go woo ima get to that tommorow</p>
+                    <ul, id="myList"></ul>
                 </section>
             </div>
             
