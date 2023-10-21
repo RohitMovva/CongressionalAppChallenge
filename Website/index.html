@@ -1,122 +1,101 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Scroll Effects V2</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js" defer></script>
-    </head>
-    <body>
-        
-        <main>
 
-            <div class="snap">
-                <header>
-                    <h1>Course Rescheduler</h1>
-                </header>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Scroll Effects V2</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
 
-            <div class="snap">
-                <div class="content">
-                    <section class="my-class">
-                        <h2>What it is</h2>
-                        <p>This is a course rescheduler that you can use to move your courses around. Made by Rohit, Pierce, Alden, and Joshua.</p>
-                        <img src="placeholder_parrot1.jfif" alt="green parrot hanging off a tree">
-                    </section>
-        
-                    <section class="my-class">
-                        <h2>What it does</h2>
-                        <p>After a masterlist of classes in inputed, the class to be removed, and the class to be added are inputed it returns your new scheduel that will have all the classe you need.</p>
-                    </section>
-        
-                    <section class="my-class secondary">
-                        <h2>How to use</h2>
-                        <ul class="row">
-                            <li class="column">Input csv with master list of classes</li>
-                            <li class="column">Input your schedule</li>
-                            <li class="column">Input the class to remove and the class to add</li>
-                            <li class="column">Submit!</li>
-                        </ul>
-                    </section>
-                </div>
-            </div>
- 
-            <div class="snap">
-                <div class="content">
-                    <h1>Call API</h1>
-                    <form id="myForm">
-                        <input type="file" id="csvFile" accept=".csv" />
-                        <br />
-                        <div class="dropdown">
-                            <select>
-                              <option class="dropbtn" value="0">Select car:</option>
-                            </select>
-                        </div>
-                        <!-- <div class="dropdown">
-                            <button class="dropbtn">Dropdown</button>
-                            <div class="dropdown-content">
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">HTML</label><br>
-                                <input type="radio" id="css" name="fav_language" value="CSS">
-                                <label for="css">CSS</label><br>
-                                <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-                                <label for="javascript">JavaScript</label>
-                            </div>
-                          </div> -->
-                          <br>
-                        <div class="dropdown">
-                            <button class="dropbtn">input currect schedule</button>
-                            <div class="dropdown-content">
-                                <input type="checkbox" id="html" name="fav_language" value="HTML">
-                                <label for="html">HTML</label><br>
-                                <input type="checkbox" id="css" name="fav_language" value="CSS">
-                                <label for="css">CSS</label><br>
-                                <input type="checkbox" id="javascript" name="fav_language" value="JavaScript">
-                                <label for="javascript">JavaScript</label>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="dropdown">
-                            <button class="dropbtn">what class do you want to remove</button>
-                            <div class="dropdown-content">
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">HTML</label><br>
-                                <input type="radio" id="css" name="fav_language" value="CSS">
-                                <label for="css">CSS</label><br>
-                                <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-                                <label for="javascript">JavaScript</label>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="dropdown">
-                            <button class="dropbtn">what class do you want to add</button>
-                            <div class="dropdown-content">
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">HTML</label><br>
-                                <input type="radio" id="css" name="fav_language" value="CSS">
-                                <label for="css">CSS</label><br>
-                                <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-                                <label for="javascript">JavaScript</label>
-                            </div>
-                          </div>
-                          <br>
-                        <input type="submit" value="Submit" />
-                        <!-- <input type="text" id="username" placeholder="Enter your name"> -->
-                        <!-- <button onclick="callAPI()">Greet Me</button> -->
-                        <p id="response"></p>
-                </div>
+<body>
 
-                <section class="form">
-                    <p>this is where the form will go woo ima get to that tommorow</p>
-                    <ul, id="myList"></ul>
+    <main>
+
+        <div class="snap">
+            <header>
+                <h1>Course Rescheduler</h1>
+            </header>
+        </div>
+
+        <div class="snap">
+            <div class="content">
+                <section class="my-class">
+                    <h2>What it is</h2>
+                    <p>This is a course rescheduler that you can use to move your courses around. Made by Rohit, Pierce,
+                        Alden, and Joshua.</p>
+                    <img src="placeholder_parrot1.jfif" alt="green parrot hanging off a tree">
+                </section>
+
+                <section class="my-class">
+                    <h2>What it does</h2>
+                    <p>After a masterlist of classes in inputed, the class to be removed, and the class to be added are
+                        inputed it returns your new scheduel that will have all the classe you need.</p>
+                </section>
+
+                <section class="my-class secondary">
+                    <h2>How to use</h2>
+                    <ul class="row">
+                        <li class="column">Input csv with master list of classes</li>
+                        <li class="column">Input your schedule</li>
+                        <li class="column">Input the class to remove and the class to add</li>
+                        <li class="column">Submit!</li>
+                    </ul>
                 </section>
             </div>
-            
-        </main>
+        </div>
 
-    </body>
+        <div class="snap">
+            <div class="content">
+                <!-- <h1>Call API</h1> -->
+                <form id="myForm">
+                    <input type="file" id="csvFile" accept=".csv" />
+                    <br />
+
+                    <div class="multiselect hiddenv2">
+                        <div class="selectBox" onclick="showCheckboxes()">
+                            <select>
+                                <option>Select an option</option>
+                            </select>
+                            <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes" class="hiddenv2"></div>
+                    </div>
+
+                    
+
+
+
+                    <div class="dropdown hiddenv2">
+                        <select id="dropped_course">
+                            <option class="dropdown-content" value="0">Select class to drop</option>
+                        </select>
+                    </div>
+
+                    <br>
+
+                    <div class="dropdown hiddenv2">
+                        <select id="added_course">
+                            <option class="dropdown-content" value="0">Select class to drop</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Submit" />
+                    <p id="response"></p>
+            </div>
+
+            <section class="form">
+                <p>this is where the form will go woo ima get to that tommorow</p>
+                <ul, id="myList">
+                    </ul>
+            </section>
+        </div>
+
+    </main>
+
+</body>
+
 </html>
