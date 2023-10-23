@@ -114,6 +114,15 @@ img {
     header {
         grid-template-columns: 100%;
     }
+    h2 {
+        text-align: left;
+    }
+}
+
+@media screen and (max-height: 1000px) {
+    header {
+        height: 130vh;
+    }
 }
 
 header p {
