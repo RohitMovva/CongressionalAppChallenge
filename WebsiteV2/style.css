@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:700|Poppins:400');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins';
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Poppins';
+    font-weight: 700;
+    text-align: center;
+}
+
+html {
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-size: 4.210rem;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-size: 3.158rem;
+}
+
+h3 {
+    font-size: 2.369rem;
+}
+
+h4 {
+    font-size: 1.777rem;
+}
+
+h5 {
+    font-size: 1.333rem;
+}
+
+small {
+    font-size: 0.750rem;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 1px solid black;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    transition: 1s;
+}
+
+nav ul li a:hover {
+    color: #4073A5;
+    font-size: 110%;
+    transition: 400ms;
+}
+
+header {
+    display: grid;
+    padding: 0 120px;
+    margin: auto;
+    grid-template-columns: 40% 40%;
+    column-gap: 20%;
+    height: 88vh;
+    place-items: center;
+}
+
+img {
+    width: 85%;
+    height: auto;
+}
+
+header p {
+    width: max-content;
+    margin: 50px 0;
+    transition: 400ms;
+}
+
+header p:hover {
+    font-size: 110%;
+    background-color: beige;
+    transition: 400ms;
+}
+
+header p a {
+    text-decoration: none;
+    color: black;
+}
+
+.fancy {
+    color: #E04852;
+}
+
+.rounded-box {
+    background-color: #E0DFD1;
+    padding: 30px;
+    margin: 50px 0 0;
+    border-radius: 20px;
+}

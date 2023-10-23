@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Rescheduler</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="">Course Reschedueler</a></li>
+            <li style="float: right;"><a href="">Video</a></li>
+            <li style="float: right;"><a href="">Code</a></li>
+        </ul>
+    </nav>
+    <header>
+        <section>
+            <h1>Quickly Change Your <span class="fancy">Schedule</span></h1>
+            <p><a class="rounded-box" href="#my-form">Get Started</a></p>
+        </section>
+        <img src="Images\placeholder_parrot1.jfif" alt="placeholder parrot">
+    </header>
+    <section>
+        <section>
+            <h2>Why should you use this?</h2>
+            <p>Lorem ipsum</p>
+        </section>
+        <section>
+            <h2>How does it work?</h2>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+    </section>
+    <form id="myForm" class="my-form">
+        <input type="file" id="csvFile" accept=".csv" />
+
+        <br />
+
+        <div class="multiselect hiddenv2">
+            <div class="selectBox" onclick="showCheckboxes()">
+                <select>
+                    <option>Select an option</option>
+                </select>
+                <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes" class="hiddenv2"></div>
+        </div>
+
+        <div class="dropdown hiddenv2">
+            <select id="dropped_course">
+                <option class="dropdown-content" value="0">Select class to drop</option>
+            </select>
+        </div>
+
+        <br>
+
+        <div class="dropdown hiddenv2">
+            <select id="added_course">
+                <option class="dropdown-content" value="0">Select class to drop</option>
+            </select>
+        </div>
+        <input type="submit" value="Submit" />
+        <p id="response"></p>
+    </form>
+    <section>
+        <p>Made by Rohit, Alden, Pierce, and Joshua</p>
+    </section>
+</body>
+
+</html>
