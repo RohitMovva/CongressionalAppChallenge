@@ -134,7 +134,11 @@ header p a {
 }
 
 section.content {
-    height: 70vh
+    height: 70vh;
+    display: grid;
+    padding: 0 120px;
+    margin: auto;
+    place-items: center;
 }
 
 .fancy {
@@ -147,6 +151,15 @@ section.content {
     margin: 50px 0 0;
     border-radius: 20px;
 }
+
+footer {
+    background-color: #f7f7f7;
+    height: 20vh;
+    display: grid;
+    place-items: center;
+}
+
+/* Form stuff */
 
 .dropbtn {
     background-color: #04AA6D;
