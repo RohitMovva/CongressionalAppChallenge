@@ -117,11 +117,10 @@ img {
     h2 {
         text-align: left;
     }
-}
-
-@media screen and (max-height: 1000px) {
-    header {
-        height: 130vh;
+    @media screen and (max-height: 1000px) {
+        header {
+            height: 130vh;
+        }
     }
 }
 
