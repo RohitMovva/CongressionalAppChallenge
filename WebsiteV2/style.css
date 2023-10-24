@@ -4,6 +4,26 @@
     box-sizing: border-box;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 body {
     font-family: 'Poppins';
     font-weight: 400;
@@ -115,12 +135,15 @@ img {
         max-width: 380px;
         min-width: none;
     }
+
     header {
         grid-template-columns: 100%;
     }
+
     h2 {
         text-align: left;
     }
+
     @media screen and (max-height: 1000px) {
         header {
             height: 130vh;
@@ -179,75 +202,86 @@ footer {
     padding: 16px;
     font-size: 16px;
     border: none;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
     position: relative;
     padding: 16px;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
+}
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
 
 .multiselect {
     width: 200px;
-  }
-  
-  .selectBox {
+}
+
+.selectBox {
     position: relative;
-  }
-  
-  .selectBox select {
+}
+
+.selectBox select {
     width: 100%;
     font-weight: bold;
-  }
-  
-  .overSelect {
+}
+
+.overSelect {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-  }
-  
-  #checkboxes {
+}
+
+#checkboxes {
     display: none;
+    background-color: white;
+    position: absolute;
     border: 1px #dadada solid;
-  }
-  
-  #checkboxes label {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 5;
+}
+
+#checkboxes label {
     display: block;
-  }
-  
-  #checkboxes label:hover {
+}
+
+#checkboxes label:hover {
     background-color: #1e90ff;
-  }
+}
 
-  .hiddenv2 {
+.hiddenv2 {
     display: none;
-    
-  }
+}
 
-  .showv2 {
+.showv2 {
     display: block;
-  }
+}
