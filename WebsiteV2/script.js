@@ -130,35 +130,14 @@ myForm.addEventListener("submit", function (e) {
     const dropped_course = document.getElementById("dropped_course");
     const class_list = datar;
     const schedule = [];
-    // const myElement = document.getElementById("checkboxes");
-    // console.log("children\n");
-    // console.log(myElement.childElementCount)
-    // for (const child of myElement.children) {
-    //     if (child.options[child.selectedIndex].value == )
-    // }
-    const optcontainer = document.getElementById("checkboxes");
-    console.log(optcontainer.childElementCount)
-    const options = optcontainer.selectedOptions;
-    console.log(optcontainer.childNodes)
-    // const result = [];
 
+    const optcontainer = document.getElementById("checkboxes");
     for (const i of optcontainer.childNodes) {
-        console.log(i + "\n");
         if (!i.childNodes[1].checked){
             continue;
         }
-        // opt = options[i];
-
-        // if (opt.selected) {
-        // result.push(opt.value || opt.text);
-        // }
         schedule.push(i.childNodes[0].wholeText);
     }
-
-//   return result;
-    console.log("children: ");
-    console.log(result);
-
 
     fetch('http://127.0.0.1:5000/api/upload-all', {
         method: 'POST',
