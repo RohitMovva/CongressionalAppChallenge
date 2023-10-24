@@ -65,6 +65,8 @@ h2 {
 
 h3 {
     font-size: 2.369rem;
+    padding: 0;
+    margin: 0;
 }
 
 h4 {
@@ -130,27 +132,6 @@ img {
     height: auto;
 }
 
-@media screen and (max-width: 880px) {
-    img {
-        max-width: 380px;
-        min-width: none;
-    }
-
-    header {
-        grid-template-columns: 100%;
-    }
-
-    h2 {
-        text-align: left;
-    }
-
-    @media screen and (max-height: 1000px) {
-        header {
-            height: 130vh;
-        }
-    }
-}
-
 header p {
     width: max-content;
     margin: 50px 0;
@@ -176,6 +157,37 @@ section.content {
     place-items: center;
 }
 
+.boxes {
+    display: grid;
+    margin: auto;
+}
+
+.box {
+    min-width: fit-content;
+    margin: 10px;
+    list-style-type: none;
+    display: grid;
+    place-items: center;
+}
+
+.threeb {
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 3%;
+}
+
+ul.threeb li {
+    padding: 5vw 5vw;
+}
+
+.fourb{
+    grid-template-columns: 20% 20% 20% 20%;
+    column-gap: 5%;
+}
+
+ul.fourb li {
+    padding: 4vw 4vw;
+}
+
 .fancy {
     color: #E04852;
 }
@@ -192,6 +204,47 @@ footer {
     height: 20vh;
     display: grid;
     place-items: center;
+}
+
+@media screen and (max-width: 880px) {
+    img {
+        max-width: 380px;
+        min-width: none;
+        display: none;
+    }
+
+    header {
+        grid-template-columns: 100%;
+    }
+
+    h2, h3 {
+        text-align: left;
+    }
+
+    .fourb, .threeb {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    section.big {
+        margin: 0;
+        padding: 10px;
+    }
+
+    ul.threeb li, ul.fourb li {
+        margin: 30px 0;
+        width: 80vw;
+    }
+
+    section.big {
+        height: 230vw;
+        max-height: 150vh;
+    }
+
+    @media screen and (max-height: 1000px) {
+        
+    }
 }
 
 /* Form stuff */
