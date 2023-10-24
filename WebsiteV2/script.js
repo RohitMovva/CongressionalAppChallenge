@@ -102,7 +102,7 @@ csvFile.onchange = function(){
 
                 let option = document.createElement('option');
                 option.class = "dropdown-content";
-                option.value = String.fromCharCode(i);
+                option.value = classes[i];
                 option.innerText = classes[i];
                 let clone = option.cloneNode(true);
 
@@ -126,8 +126,8 @@ csvFile.onchange = function(){
 };
 myForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const added_course = document.getElementById("added_course");
-    const dropped_course = document.getElementById("dropped_course");
+    const added_course = document.querySelector('#added_course').value;
+    const dropped_course = document.querySelector('#dropped_course').value;
     const class_list = datar;
     const schedule = [];
 
