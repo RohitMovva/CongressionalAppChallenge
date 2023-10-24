@@ -1,6 +1,223 @@
-Class Name,Required,Size,Period 1,Period 2,Period 3,Period 4
-english,r,3,1,0,1,0
-math,r,3,0,1,0,1
-study hall,r,3,0,1,0,1
-band,e,3,1,0,0,0
-art,e,3,0,0,1,0
+Course Name,Teacher,Room,Period,Count,Max
+AP Art History,Bertarelli,L102 Lab,1,32,30
+AP Studio Art; 2D Design,Bertarelli,N265,7,16,30
+AP Studio Art; Drawing,Bertarelli,Art 1,4,14,25
+Art 10 - Foundations in Art,Guajardo,Art 1,1,32,30
+Art 10 - Foundations in Art,Guajardo,Art 1,7,32,30
+Art 20 - Studio Practices,Guajardo,Art 1,5,19,30
+Art 30 - Media & Voice in Art,Bertarelli,Art 1,2,18,30
+Digital Art & Photography I,Guajardo,N265,2,30,30
+Digital Art & Photography I,Guajardo,N265,6,30,30
+Film Studies,Bertarelli,N265,5,30,30
+Tech Theater & Performance,Mylott,Stage,8,29,30
+Yearbook,Guajardo,N265,4,23,20
+AP Computer Science,Hettmansperger,N130 Tech,2,26,30
+AP Computer Science,Hettmansperger,N130 Tech,4,22,30
+Data Structures Honors,Hettmansperger,N130 Tech,5,16,30
+Intro to Computer Programming,Hettmansperger,N130 Tech,3,30,30
+Intro to Computer Programming,Hettmansperger,N130 Tech,6,31,30
+Health/Wellness,Starbuck.K,L102 Lab,2,23,30
+Health/Wellness,Starbuck.K,L102 Lab,4,24,30
+Health/Wellness,Starbuck.K,L102 Lab,6,28,30
+AP Language and Composition,Young,N175,1,18,30
+AP Language and Composition,Young,N175,3,13,30
+AP Language and Composition,Rhodes,N175,5,20,30
+AP Language and Composition,Young,N175,6,15,30
+AP Language and Composition,Rhodes,N175,7,16,30
+AP Language and Composition,Young,N175,8,13,30
+AP Literature and Composition,Amidon,N270,1,25,30
+AP Literature and Composition,Amidon,N270,6,16,30
+English Language & Comp,Young,N175,1,12,30
+English Language & Comp,Young,N175,3,14,30
+English Language & Comp,Rhodes,N175,5,10,30
+English Language & Comp,Young,N175,6,6,30
+English Language & Comp,Rhodes,N175,7,10,30
+English Language & Comp,Young,N175,8,8,30
+Senior Literature and Comp,Amidon,N270,2,31,30
+Senior Literature and Comp,Amidon,N270,4,22,30
+Senior Literature and Comp,Young,N260,5,24,30
+Senior Literature and Comp,Amidon,N270,7,20,30
+Why Writing Matters,Melber,N195,1,32,30
+Why Writing Matters,Melber,N195,3,31,30
+Why Writing Matters Honors,Fink,N140,1,18,30
+Why Writing Matters Honors,Fink,N140,2,26,30
+Why Writing Matters Honors,Fink,N140,3,27,30
+Why Writing Matters Honors,Fink,N140,4,24,30
+World Literature,Rhodes,N260,1,19,30
+World Literature,Rhodes,N260,4,20,30
+World Literature,Rhodes,N260,6,24,30
+World Literature Honors,Melber,N195,4,31,31
+World Literature Honors,Melber,N195,5,30,31
+World Literature Honors,Melber,N195,8,30,31
+Algebra II / Trig Honors,Tarbutton,N180,3,4,8
+Algebra II / Trig Honors,Tarbutton,N180,3,24,30
+Algebra II / Trig Honors,Tarbutton,N180,4,31,30
+Algebra II / Trig Honors,Tarbutton,N180,7,1,8
+Algebra II / Trig Honors,Tarbutton,N180,7,28,30
+Algebra II / Trig Honors,Tarbutton,N180,8,30,30
+Algebra II / Trig.,Chakraborty-Spotts,N170,2,22,30
+Algebra II / Trig.,Chakraborty-Spotts,N170,6,19,30
+AP Calculus AB,Tarbutton,N180,6,31,30
+AP Calculus BC,Lehr,N280,1,31,32
+AP Calculus BC,Lehr,N280,5,32,32
+AP Statistics,Letter.B,N285,2,28,30
+AP Statistics,Letter.B,N285,3,30,30
+AP Statistics,Letter.B,N285,4,22,30
+Differential Equations Honors,Lehr,N280,2,25,30
+Differential Equations Honors,Lehr,N280,4,20,30
+Finance Models; PreCalc Honor,Howard,N150,3,15,30
+Finance Models; PreCalc Honor,Howard,N150,4,26,30
+Geometry & Probability Honors,Salem,N170,3,20,32
+Geometry & Probability Honors,Salem,N170,3,11,15
+Geometry & Probability Honors,Salem,N170,4,18,32
+Geometry & Probability Honors,Salem,N170,4,14,15
+Geometry & Probability Honors,Salem,N170,7,18,32
+Geometry & Probability Honors,Salem,N170,7,13,15
+Geometry & Probability Honors,Salem,N170,8,15,32
+Geometry & Probability Honors,Salem,N170,8,17,15
+Integrated Math I,Chakraborty-Spotts,N150,1,19,30
+Integrated Math I,Chakraborty-Spotts,N150,5,20,30
+Integrated Math II,Letter.B,N285,6,13,30
+Multivariable Calculus 3 Honor,Lehr,N280,6,32,31
+Pre Calculus,Letter,N285,5,21,30
+Pre Calculus Honors,Howard,N150,2,29,30
+Pre Calculus Honors,Howard,N150,6,27,30
+Pre Calculus Honors,Howard,N150,7,28,30
+Chamber Honors Orchestra,Schneider,Orchestra,1,35,35
+Chamber Orchestra,Schneider,Orchestra,1,2,30
+Concert Band,Spicer,Band,3,8,45
+Concert Band,Spicer,Band,3,12,45
+Concert Choir,Henning,Choir,1,15,30
+Concert Choir,Henning,Choir,1,3,20
+Concert Orchestra,Schneider,Orchestra,3,24,35
+Concert Orchestra,Schneider,Orchestra,3,9,30
+General Band,Spicer,Band,6,29,45
+Jazz Band,Spicer,Band,2,12,30
+Jazz Band Adv.,Spicer,Band,2,12,30
+Piano Lab,Henning,Choir,7,5,25
+Piano Lab,Henning,Choir,7,18,25
+Puma Pride Honors Choir,Henning, Ian,Choir,5,18,30
+Wind Symphony Band,Spicer,Band,1,2,45
+Wind Symphony Honors-Band,Spicer,Band,1,32,45
+Anatomy & Physiology Honors,Sessions,N245 Lab,4,31,30
+Anatomy & Physiology Honors,Sessions,N245 Lab,6,22,30
+AP Biology,Sessions,N245 Lab,3,32,32
+AP Chemistry,Schaefer,N240 Lab,2,25,30
+AP Chemistry,Schaefer,N240 Lab,4,31,30
+AP Environmental Science,Shedd,N220 Lab,6,32,30
+AP Environmental Science,Shedd,N220 Lab,8,31,30
+AP Physics C (Mechanics),Shedd,N220 Lab,7,33,32
+Biology 1,Starbuck.N,N250 Lab,4,18,23
+Biology 1,Starbuck.N,N250 Lab,6,23,23
+Biology 1 Honors,Shedd,N255 Lab,1,30,30
+Biology 1 Honors,Shedd,N255 Lab,3,23,30
+Biology 1 Honors,Sessions,N245 Lab,5,30,30
+Biology 1 Honors,Sessions,N245 Lab,7,26,30
+Chemistry 1,Starbuck.N,N250 Lab,5,20,30
+Chemistry 1,Starbuck.N,N250 Lab,7,19,30
+Chemistry 1 Honors,Starbuck.N,N240 Lab,1,30,30
+Chemistry 1 Honors,Schaefer,N240 Lab,3,31,30
+Chemistry 1 Honors,Schaefer,N240 Lab,5,31,30
+Chemistry 1 Honors,Schaefer,N240 Lab,6,31,30
+Physics 1,Zubler,N220 Lab,4,22,30
+Physics 1 Honors,Zubler,N220 Lab,1,24,31
+Physics 1 Honors,Zubler,N220 Lab,2,31,31
+Physics 1 Honors,Zubler,N220 Lab,3,30,31
+Physics 1 Honors,Zubler,N220 Lab,5,24,31
+Science Research Seminar Honor,Meiler.I,N135,8,15,25
+First-Year Intro to Innovation,Letter.K,INN,1,28,30
+First-Year Intro to Innovation,Letter.K,INN,2,31,30
+First-Year Intro to Innovation,Letter.K,INN,3,19,30
+First-Year Intro to Innovation,Letter.K,INN,6,26,30
+First-Year Intro to Innovation,Letter.K,INN,7,20,30
+First-Year Intro to Innovation,Letter.K,INN,8,29,30
+Leadership,Flanhofer,N295,2,18,30
+Student Aide (fall),Find Required Aide Form in eMail,CCC,2,2,150
+Student Aide (fall),Find Required Aide Form in eMail,CCC,3,1,150
+Student Aide (fall),Find Required Aide Form in eMail,CCC,5,1,150
+Student Aide (fall),Find Required Aide Form in eMail,CCC,6,3,150
+Student Aide (fall),Find Required Aide Form in eMail,CCC,7,2,150
+Student Aide (fall),Find Required Aide Form in eMail,CCC,8,2,150
+Study Hall (fall),Hettmansperger,N130 Tech,1,21,30
+Study Hall (fall),Miles / Tarbutton,N180,1,26,30
+Study Hall (fall),Schaefer / Letter.B,N250 Lab,1,23,30
+Study Hall (fall),Melber,N195,2,17,30
+Study Hall (fall),Rhodes,N260,2,17,30
+Study Hall (fall),Amidon,N270,3,20,30
+Study Hall (fall),Galef-Brown / Guajardo,Art 1,3,20,30
+Study Hall (fall),Letter.K / Shedd,INN,4,12,30
+Study Hall (fall),Matthew,N275,4,11,30
+Study Hall (fall),Young / Leeper,N175,4,11,30
+Study Hall (fall),Howard / Puccio,N170,5,15,30
+Study Hall (fall),Meiler.I,N135,5,16,30
+Study Hall (fall),Salem,N140,6,24,30
+Study Hall (fall),Zubler,N255 Lab,6,21,30
+Study Hall (fall),Barbour / Gould,N155,7,23,30
+Study Hall (fall),Flanhofer,N295,7,19,30
+Study Hall (fall),Lehr,N280,7,22,30
+Study Hall (fall),Bertarelli,Art 1,8,26,30
+Study Hall (fall),Chakraborty-Spotts,N150,8,23,30
+Study Hall (fall),Sessions / Starbuck.N,N250 Lab,8,30,30
+Study Skills,Shedd,N180,2,22,30
+Study Skills,Tarbutton,N180,5,23,30
+Athletic Wts & Cond,Puccio,Weight Rm,2,22,26
+Athletic Wts & Cond,Puccio,Weight Rm,6,29,26
+Basketball IQ,Puccio,NE Gym,1,19,30
+Physical Education,Puccio,NE Gym,4,26,30
+Physical Education,Puccio,NE Gym,7,33,30
+Walking & Life Fitness,Puccio,NE Gym,3,26,30
+AP Human Geography,Miles,N145,5,29,30
+AP Human Geography,Miles,N145,6,21,30
+AP Human Geography,Miles,N145,8,25,30
+AP Psychology,Flanhofer,N295,3,23,30
+AP Psychology,Flanhofer,N295,4,15,30
+AP Psychology,Flanhofer,N295,5,20,30
+AP Psychology,Flanhofer,N295,6,16,30
+AP U.S. Government,Galef-Brown,N160,1,18,30
+AP U.S. Government,Galef-Brown,N160,2,27,30
+AP U.S. Government,Galef-Brown,N160,5,31,30
+AP U.S. Government,Galef-Brown,N160,8,30,30
+AP U.S. History,Leeper,N185,1,7,30
+AP U.S. History,Leeper,N185,3,7,30
+AP U.S. History,Leeper,N185,5,10,30
+AP U.S. History,Leeper,N185,6,4,30
+AP U.S. History,Leeper,N185,7,8,30
+AP U.S. History,Leeper,N185,8,6,30
+Human Geography,Miles,N145,3,26,30
+Human Geography,Miles,N145,4,25,30
+Human Geography,Miles,N145,7,27,30
+Psychology,Flanhofer,N295,3,9,30
+Psychology,Flanhofer,N295,4,13,30
+Psychology,Flanhofer,N295,5,10,30
+Psychology,Flanhofer,N295,6,9,30
+U.S. Government,Galef-Brown,N160,4,26,30
+U.S. Government,Galef-Brown,N160,7,25,30
+U.S. History,Leeper,N185,1,23,30
+U.S. History,Leeper,N185,3,22,30
+U.S. History,Leeper,N185,5,18,30
+U.S. History,Leeper,N185,6,17,30
+U.S. History,Leeper,N185,7,22,30
+U.S. History,Leeper,N185,8,15,30
+AP French Language,Meiler.I,N135,3,14,30
+AP Spanish Language,Matthews,N275,3,27,30
+AP Spanish Language,Matthews,N275,7,15,30
+French 20,Meiler.I,N135,7,5,30
+French 35 Honors,Meiler.I,N135,4,22,30
+French 45 Honors,Meiler.I,N135,2,25,30
+Spanish 10,Barbour,N155,2,22,30
+Spanish 20,Cotto,N165,7,15,30
+Spanish 20,Cotto,N165,8,31,30
+Spanish 30,Gould,N165,3,31,30
+Spanish 30,Gould,N165,5,32,30
+Spanish 35 Honors,Gould,N165,2,31,30
+Spanish 35 Honors,Gould,N165,4,26,30
+Spanish 35 Honors,Gould,N165,6,25,30
+Spanish 41 Cultural  & Oral,Barbour,N155,4,24,30
+Spanish 41 Cultural  & Oral,Barbour,N155,5,27,30
+Spanish 41 Cultural  & Oral,Barbour,N155,8,30,30
+Spanish 45 Honors,Matthews,N275,2,27,30
+Spanish 45 Honors,Matthews,N275,6,20,30
+Spanish Heritage 3 Honors,Barbour,N155,1,7,32
+Spanish Heritage Speakers,Meiler.Y,S255,1,23,32
+Spanish Heritage Speakers 2,Barbour,N155,1,10,32
+Spanish Hon; Hisp.Cult/Oral Ex,Matthews,N275,5,16,30
