@@ -138,6 +138,8 @@ myForm.addEventListener("submit", function (e) {
         }
         schedule.push(i.childNodes[0].wholeText);
     }
+    console.log(schedule);
+
 
     fetch('http://127.0.0.1:5000/api/upload-all', {
         method: 'POST',
