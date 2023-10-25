@@ -150,7 +150,6 @@ header p a {
 }
 
 section.content {
-    height: 70vh;
     display: grid;
     padding: 0 120px;
     margin: auto;
@@ -227,19 +226,9 @@ footer {
         padding: 0;
     }
 
-    section.big {
-        margin: 0;
-        padding: 10px;
-    }
-
     ul.threeb li, ul.fourb li {
         margin: 30px 0;
         width: 80vw;
-    }
-
-    section.big {
-        height: 230vw;
-        max-height: 150vh;
     }
 
     @media screen and (max-height: 1000px) {
