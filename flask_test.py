@@ -108,6 +108,7 @@ def get_shortest_switches():
     dropped_course = request.get_json()['dropped_course']
     # getPath(class_list, student_schedule, added_course, dropped_course)
     getPath(class_list, student_schedule, added_course, dropped_course)
+    new_schedule = [-1 for _ in range(8)]
     return jsonify({"message": "Success!"})
 
 
