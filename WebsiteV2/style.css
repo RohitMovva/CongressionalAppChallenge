@@ -150,6 +150,8 @@ header p:hover {
 header p a {
     text-decoration: none;
     color: black;
+    padding: 30px;
+    margin: 50px 0 0;
 }
 
 section.content {
@@ -168,23 +170,30 @@ img.icon {
 .boxes {
     display: grid;
     margin: auto;
+    margin-top: 30px;
+    padding: 0;
 }
 
 .box {
     min-width: fit-content;
-    margin: 10px;
     list-style-type: none;
     display: grid;
     place-items: center;
 }
 
 .threeb {
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 3%;
 }
 
 ul.threeb li {
     padding: 3vw 3vw;
+}
+
+iframe {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
 }
 
 .fancy {
@@ -195,14 +204,34 @@ ul.threeb li {
     color: #4073A5;
 }
 
-li.grey  {
+li.grey {
     background-color: #f7f7f7;
+}
+
+.bigbox {
+    width: 100%;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 40% 50%;
+    column-gap: 5%;
+}
+
+.twogrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5%;
+}
+
+.a {
+    height: max-content;
+}
+
+.a:nth-child(1) {
+    margin-bottom: 30px;
 }
 
 .rounded-box {
     background-color: #E0DFD1;
-    padding: 30px;
-    margin: 50px 0 0;
     border-radius: 20px;
 }
 
@@ -214,6 +243,9 @@ footer {
 }
 
 @media screen and (max-width: 1100px) {
+    nav li {
+        font-size: 0.9rem;
+    }
 
     header {
         grid-template-columns: none;
@@ -225,7 +257,8 @@ footer {
         min-width: none;
     }
 
-    h2, h3 {
+    h2,
+    h3 {
         text-align: center;
     }
 
@@ -240,9 +273,13 @@ footer {
         padding: 0;
     }
 
-    ul.threeb li, ul.fourb li {
+    ul.threeb li {
         margin: 30px 0;
         width: 80vw;
+    }
+
+    .twogrid, .bigbox {
+        display: block;
     }
 }
 
