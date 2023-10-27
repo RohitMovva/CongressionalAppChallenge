@@ -56,7 +56,10 @@ function showCheckboxes() {
 }
 
 const myForm = document.getElementById("myForm");
+const loginForm = document.getElementById("login_form");
+const signupForm = document.getElementById("signup_form");
 const csvFile = document.getElementById("csvFile");
+var id = -1;
 var classes = [];
 var datar = "";
 csvFile.onchange = function(){
@@ -77,7 +80,8 @@ csvFile.onchange = function(){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "username": datar
+                "username": datar,
+                "id": id
             })
         })
         .then(response => response.json())
@@ -123,6 +127,7 @@ csvFile.onchange = function(){
     console.log(classes);
     reader.readAsText(input);
 };
+
 myForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const added_course = document.querySelector('#added_course').value;
@@ -149,7 +154,8 @@ myForm.addEventListener("submit", function (e) {
             "classes": class_list, 
             "schedule": schedule,
             "added_course": added_course,
-            "dropped_course": dropped_course
+            "dropped_course": dropped_course,
+            "id": id
         }),
     })
     .then(response => response.json())
@@ -168,3 +174,57 @@ myForm.addEventListener("submit", function (e) {
         console.error('Error:', error);
     });
 });
+
+loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username= document.getElementById("fname");
+    const password= document.getElementById("lname");
+    fetch('http://127.0.0.1:5000/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "username": username,
+            "password": password,
+            "id": id
+        }),
+    })
+    .then(response => response.json())
+    .then((data) => {
+        if (!data.passed){
+            document.getElementById("invalid") = "Invalid username or password";
+            return;
+        }
+        id = data.id;
+        document.location.href = "index.html";
+    })
+    .catch(error => {
+        console.error('Error', error);
+    });
+})
+
+submitForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username= document.getElementById("fname");
+    const password= document.getElementById("lname");
+    fetch('http://127.0.0.1:5000/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "username": username,
+            "password": password,
+            "id": id
+        }),
+    })
+    .then(response => response.json())
+    .then((data) => {
+        id = data.id;
+        document.location.href = "index.html";
+    })
+    .catch(error => {
+        console.error('Error', error);
+    });
+})
