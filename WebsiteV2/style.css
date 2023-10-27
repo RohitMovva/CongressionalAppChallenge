@@ -389,7 +389,7 @@ footer {
 }
 
 .display {
-    font-size: 9rem;
+    font-size:16vh;
     text-align: left;
     color: white;
     position: absolute;
@@ -485,4 +485,10 @@ form.loginform {
 	background: rgba(0, 0, 0, 0.75);
 	font-size: 14px;
 	text-align: center;
+}
+
+@media (max-width:1250px){
+    .display{
+        font-size:10vw
+    }
 }
