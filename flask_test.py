@@ -12,7 +12,7 @@ new_schedule = [-1 for _ in range(8)]
 def shortestPath(classes, schedule, original_schedule):
     # print(new_schedule)
     n = len(schedule)
-    print("new call: ", end=" ")
+    print("new call: ")
     printyy(new_schedule)
     print()
     if (n == 0):
