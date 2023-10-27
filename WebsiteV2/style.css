@@ -419,6 +419,26 @@ p.error {
     text-align: center;
     border: 1px solid #f3bb1b;
 }
+
+form.loginform {
+    display: grid;
+}
+
+.submit {
+    border-radius: 10px;
+    background-color: #E0DFD1;
+    border-style: none;
+    padding: 10px;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.input-box {
+    border-radius: 5px;
+    border: 1px solid #c0bdbd;
+    padding: 10px;
+}
+
 @media (max-width:1250px){
     .display{
         font-size:10vw
