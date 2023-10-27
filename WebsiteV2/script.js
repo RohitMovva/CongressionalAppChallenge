@@ -55,10 +55,17 @@ function showCheckboxes() {
   }
 }
 
-const myForm = document.getElementById("myForm");
+var myForm = document.getElementById("myForm");
 const loginForm = document.getElementById("login_form");
 const signupForm = document.getElementById("signup_form");
-const csvFile = document.getElementById("csvFile");
+var csvFile = document.getElementById("csvFile");
+if (csvFile == null){
+    csvFile = -1;
+}
+
+// if (myForm == null){
+//     myForm = -1;
+// }
 var id = -1;
 var classes = [];
 var datar = "";
@@ -128,6 +135,7 @@ csvFile.onchange = function(){
     reader.readAsText(input);
 };
 
+if (myForm != null){
 myForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const added_course = document.querySelector('#added_course').value;
@@ -173,12 +181,14 @@ myForm.addEventListener("submit", function (e) {
     .catch(error => {
         console.error('Error:', error);
     });
-});
+});}
 
+if (loginForm != null){
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const username= document.getElementById("fname");
-    const password= document.getElementById("lname");
+    const username= document.getElementById("fname").value;
+    const password= document.getElementById("lname").value;
+    console.log(username);
     fetch('http://127.0.0.1:5000/api/login', {
         method: 'POST',
         headers: {
@@ -193,7 +203,8 @@ loginForm.addEventListener("submit", function (e) {
     .then(response => response.json())
     .then((data) => {
         if (!data.passed){
-            document.getElementById("invalid") = "Invalid username or password";
+            console.log("HEY");
+            document.getElementById("error").innerHTML = "Invalid username or password";
             return;
         }
         id = data.id;
@@ -202,13 +213,17 @@ loginForm.addEventListener("submit", function (e) {
     .catch(error => {
         console.error('Error', error);
     });
-})
+})}
 
-submitForm.addEventListener("submit", function (e) {
+
+if (signupForm != null){
+signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const username= document.getElementById("fname");
-    const password= document.getElementById("lname");
-    fetch('http://127.0.0.1:5000/api/login', {
+    
+    const username= document.getElementById("fname").value;
+    const password= document.getElementById("lname").value;
+    console.log(username);
+    fetch('http://127.0.0.1:5000/api/create-account', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -221,10 +236,13 @@ submitForm.addEventListener("submit", function (e) {
     })
     .then(response => response.json())
     .then((data) => {
+        if (data.code === -1){
+            document.getElementById("error").innerHTML = "Username already in use!";
+        }
         id = data.id;
         document.location.href = "index.html";
     })
     .catch(error => {
         console.error('Error', error);
     });
-})
+})}

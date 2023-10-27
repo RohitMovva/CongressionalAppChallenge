@@ -16,14 +16,16 @@ def load_object(filename):
             return pickle.load(f)
     except Exception as ex:
         print("Error during unpickling object (Possibly unsupported):", ex)
+        return None
 
 def save_object(filename, data):
-    data = sorted(data, key = lambda x: x[4], reverse=True)
+    # data = sorted(data, key = lambda x: x[4], reverse=True)
     try:
         with open(filename, "wb") as f:
             return pickle.dump(data, f)
     except Exception as ex:
         print("Error during unpickling object (Possibly unsupported):", ex)
+        return None
 
 # new_schedule = [-1 for _ in range(8)]
 def shortestPath(classes, schedule, original_schedule, new_schedule):
@@ -133,32 +135,34 @@ def get_shortest_switches():
     # schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
     # new_schedule = new_schedule
-    temp =  jsonify({"message": "Success!", "new_schedule": new_schedule})
     # new_schedule = [-1 for _ in range(8)]
-    return temp
+    return jsonify({"message": "Success!", "new_schedule": new_schedule})
 
 @app.route('/api/create-account', methods=['POST'])
 def create_account():
-    request = request.get_json()
-    username = request['username']
-    password = request['password']
+    # request = request
+    username = request.get_json()['username']
+    password = request.get_json()['password']
     account_dict = load_object("account_credentials")
+    if (account_dict == None):
+        account_dict = {}
+    if (username in account_dict[username]):
+        return jsonify({"code": -1, "id": -1})
     account_dict[username] = password
     save_object("account_credentials", account_dict)
     id = random.randint(10000000, 99999999)
-    return jsonify({"passed": True, "id": id})
+    
+    return jsonify({"code": 1, "id": id})
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    request = request.get_json()
-    username = request['username']
-    password = request['password']
+    username = request.get_json()['username']
+    password = request.get_json()['password']
     account_dict = load_object("account_credentials")
-    valid = True
     if (account_dict[username] != password):
-        return jsonify({"passed": False, "id": -1})
+        return jsonify({"code": 0, "id": -1})
     id = random.randint(10000000, 99999999)
-    return jsonify({"passed": True, "id": id})
+    return jsonify({"code": 1, "id": id})
 
 if __name__ == '__main__':
     app.run(debug=True)
