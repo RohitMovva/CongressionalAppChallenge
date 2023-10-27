@@ -1,24 +1,38 @@
 # from WebsiteV2.bruteForceShortestPath import getPath
+import random
 import sys
 from flask import Flask, jsonify, request
 from flask_cors import CORS  # <-- Import CORS
+import pickle
 # import bruteForceShortestPath
 app = Flask(__name__)
 CORS(app)  # <-- Enable CORS for the app
 
-def printyy(schedule):
-    print(schedule)
-new_schedule = [-1 for _ in range(8)]
-def shortestPath(classes, schedule, original_schedule):
+id = -1
+
+def load_object(filename):
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except Exception as ex:
+        print("Error during unpickling object (Possibly unsupported):", ex)
+
+def save_object(filename, data):
+    data = sorted(data, key = lambda x: x[4], reverse=True)
+    try:
+        with open(filename, "wb") as f:
+            return pickle.dump(data, f)
+    except Exception as ex:
+        print("Error during unpickling object (Possibly unsupported):", ex)
+
+# new_schedule = [-1 for _ in range(8)]
+def shortestPath(classes, schedule, original_schedule, new_schedule):
     # print(new_schedule)
     n = len(schedule)
-    print("new call: ")
-    printyy(new_schedule)
-    print()
+    print("new call: ", new_schedule)
     if (n == 0):
         print("Finished")
-        return 0
-    
+        return (new_schedule, 0)
     
     lowval = 100000
     class_loc = -1
@@ -43,7 +57,7 @@ def shortestPath(classes, schedule, original_schedule):
                     new_schedule[period] = -1
                 new_schedule[i] = classes[i][j]
                 
-                next_path = shortestPath(classes, schedule[1:], original_schedule)
+                next_path = shortestPath(classes, schedule[1:], original_schedule, new_schedule)[1]
                 if (lowval <= next_path):
                     new_schedule[i] = -1
                     if (period != -1):
@@ -58,21 +72,22 @@ def shortestPath(classes, schedule, original_schedule):
         # print("\n\n")
     if (class_loc == -1):
         # print("Dead end")
-        return 1000000
+        return (new_schedule, 1000000)
     print(period, " ", class_loc)
     if (original_schedule[period] != classes[period][class_loc]): # original_schedule[period] != -1 and 
         lowval += 1
 
-    return lowval
+    return (new_schedule, lowval)
 
 def getPath(classes, schedule, added_class, dropped_class):
     # new_schedule = [-1 for _ in range(8)]
 
     schedule[schedule.index(dropped_class)] = added_class
-    new_schedule = [-1 for _ in range(8)]
-    shortestPath(classes, schedule, schedule)
+    # new_schedule = [-1 for _ in range(8)]
+    new_schedule = shortestPath(classes, schedule, schedule, [-1 for _ in range(8)])[0]
     print("HEYO")
     print(new_schedule)
+    return new_schedule
 
 
 
@@ -84,12 +99,16 @@ def process_form(class_list):
 
 @app.route('/')
 def hello(class_string):
+    if (request.get_json()["id"] != id):
+        return
     classes = set({})
     for i in class_string.split("\n")[1:]:
         classes.add(i.split(',')[0])
 
 @app.route('/api/upload-form', methods=['POST'])
 def upload_form():
+    if (request.get_json()["id"] != id):
+        return
     data = request.get_json()
     name = data.get("username", "Guest")
     
@@ -97,6 +116,8 @@ def upload_form():
 
 @app.route('/api/upload-all', methods=['POST'])
 def get_shortest_switches():
+    if (request.get_json()["id"] != id):
+        return
     print("asdigo")
     raw_class_list = request.get_json()['classes']
     class_list = [[] for _ in range(8)]
@@ -108,7 +129,7 @@ def get_shortest_switches():
     added_course = request.get_json()['added_course']
     dropped_course = request.get_json()['dropped_course']
     # getPath(class_list, student_schedule, added_course, dropped_course)
-    getPath(class_list, student_schedule, added_course, dropped_course)
+    new_schedule = getPath(class_list, student_schedule, added_course, dropped_course)
     # schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
     # new_schedule = new_schedule
@@ -116,7 +137,28 @@ def get_shortest_switches():
     # new_schedule = [-1 for _ in range(8)]
     return temp
 
+@app.route('/api/create-account', methods=['POST'])
+def create_account():
+    request = request.get_json()
+    username = request['username']
+    password = request['password']
+    account_dict = load_object("account_credentials")
+    account_dict[username] = password
+    save_object("account_credentials", account_dict)
+    id = random.randint(10000000, 99999999)
+    return jsonify({"passed": True, "id": id})
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    request = request.get_json()
+    username = request['username']
+    password = request['password']
+    account_dict = load_object("account_credentials")
+    valid = True
+    if (account_dict[username] != password):
+        return jsonify({"passed": False, "id": -1})
+    id = random.randint(10000000, 99999999)
+    return jsonify({"passed": True, "id": id})
 
 if __name__ == '__main__':
     app.run(debug=True)
