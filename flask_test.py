@@ -145,9 +145,12 @@ def create_account():
     password = request.get_json()['password']
     account_dict = load_object("account_credentials")
     if (account_dict == None):
+        print("new dic")
         account_dict = {}
-    if (username in account_dict[username]):
+    if (username in account_dict):
+        print("already exists")
         return jsonify({"code": -1, "id": -1})
+    print("new username")
     account_dict[username] = password
     save_object("account_credentials", account_dict)
     id = random.randint(10000000, 99999999)
@@ -159,9 +162,14 @@ def login():
     username = request.get_json()['username']
     password = request.get_json()['password']
     account_dict = load_object("account_credentials")
+    print(username)
+    print(password)
+    print(account_dict[username])
     if (account_dict[username] != password):
+        print("breh")
         return jsonify({"code": 0, "id": -1})
     id = random.randint(10000000, 99999999)
+    print("YAY")
     return jsonify({"code": 1, "id": id})
 
 if __name__ == '__main__':
