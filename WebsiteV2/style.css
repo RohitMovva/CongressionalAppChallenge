@@ -238,7 +238,10 @@ li.grey {
 
 footer {
     background-color: #f7f7f7;
-    height: 20vh;
+    min-height: 20vh;
+}
+
+.center {
     display: grid;
     place-items: center;
 }
@@ -294,9 +297,14 @@ footer {
     border: none;
 }
 
+.dropdownselect {
+    border-radius: 5px;
+    border: 1px solid #c0bdbd;
+    padding: 10px;
+}
+
 .dropdown {
     position: relative;
-    padding: 16px;
     display: inline-block;
 }
 
