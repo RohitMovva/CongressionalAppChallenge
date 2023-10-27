@@ -71,7 +71,6 @@ csvFile.onchange = function(){
     reader.onload = function (e) {
         const text = e.target.result;
         datar = text;
-        console.log("Got here\n");
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
@@ -155,9 +154,15 @@ myForm.addEventListener("submit", function (e) {
     })
     .then(response => response.json())
     .then((data) => {
+        const new_schedule = data.new_schedule;
+        const schedule_container = document.getElementById("schedule_container");
+        schedule_container.innerHTML = '';
+        for (i = 0; i < 8; i++){
+            let label = document.createElement('p');
+            label.innerHTML = new_schedule[i];
+            schedule_container.appendChild(label);
+        }
         console.log("success")
-        // anotherMessageDiv.textContent = data.message;
-        // do stuff
     })
     .catch(error => {
         console.error('Error:', error);

@@ -69,6 +69,7 @@ def getPath(classes, schedule, added_class, dropped_class):
     # new_schedule = [-1 for _ in range(8)]
 
     schedule[schedule.index(dropped_class)] = added_class
+    new_schedule = [-1 for _ in range(8)]
     shortestPath(classes, schedule, schedule)
     print("HEYO")
     print(new_schedule)
@@ -108,8 +109,12 @@ def get_shortest_switches():
     dropped_course = request.get_json()['dropped_course']
     # getPath(class_list, student_schedule, added_course, dropped_course)
     getPath(class_list, student_schedule, added_course, dropped_course)
-    new_schedule = [-1 for _ in range(8)]
-    return jsonify({"message": "Success!"})
+    # schedule = new_schedule
+    # new_schedule = [-1 for _ in range(8)]
+    # new_schedule = new_schedule
+    temp =  jsonify({"message": "Success!", "new_schedule": new_schedule})
+    # new_schedule = [-1 for _ in range(8)]
+    return temp
 
 
 
