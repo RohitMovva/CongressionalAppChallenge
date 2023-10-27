@@ -8,7 +8,7 @@ import pickle
 app = Flask(__name__)
 CORS(app)  # <-- Enable CORS for the app
 
-id = -1
+# id = -1
 
 def load_object(filename):
     try:
@@ -91,8 +91,6 @@ def getPath(classes, schedule, added_class, dropped_class):
     print(new_schedule)
     return new_schedule
 
-
-
 def process_form(class_list):
     classes = set({})
     for i in class_list.split("\n")[1:]:
@@ -102,25 +100,30 @@ def process_form(class_list):
 @app.route('/')
 def hello(class_string):
     if (request.get_json()["id"] != id):
-        return
+        return jsonify({"code": 0, "message": "Failure!"})
     classes = set({})
     for i in class_string.split("\n")[1:]:
         classes.add(i.split(',')[0])
 
 @app.route('/api/upload-form', methods=['POST'])
 def upload_form():
-    if (request.get_json()["id"] != id):
-        return
+    id = load_object("id.pkl")
+    # print(id == int(request.get_json()["id"]))
+    if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
+        return jsonify({"code": 0, "message": "Failure!"})
+    print("MADE IT")
     data = request.get_json()
     name = data.get("username", "Guest")
     
-    return jsonify({"message": "Success!", "class_list": process_form(name)})
+    return jsonify({"code": 1, "message": "Success!", "class_list": process_form(name)})
 
 @app.route('/api/upload-all', methods=['POST'])
 def get_shortest_switches():
-    if (request.get_json()["id"] != id):
-        return
-    print("asdigo")
+    id = load_object("id.pkl")
+    # print(id, " ", request.get_json()["id"])
+    if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
+        return jsonify({"code": 0, "message": "Failure!"})
+    # print("asdigo")
     raw_class_list = request.get_json()['classes']
     class_list = [[] for _ in range(8)]
     for line in raw_class_list.split("\n")[1:]:
@@ -136,7 +139,7 @@ def get_shortest_switches():
     # new_schedule = [-1 for _ in range(8)]
     # new_schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
-    return jsonify({"message": "Success!", "new_schedule": new_schedule})
+    return jsonify({"code": 1, "message": "Success!", "new_schedule": new_schedule})
 
 @app.route('/api/create-account', methods=['POST'])
 def create_account():
@@ -154,7 +157,7 @@ def create_account():
     account_dict[username] = password
     save_object("account_credentials", account_dict)
     id = random.randint(10000000, 99999999)
-    
+    save_object("id.pkl", id)
     return jsonify({"code": 1, "id": id})
 
 @app.route('/api/login', methods=['POST'])
@@ -169,7 +172,8 @@ def login():
         print("breh")
         return jsonify({"code": 0, "id": -1})
     id = random.randint(10000000, 99999999)
-    print("YAY")
+    save_object("id.pkl", id)
+    print(id)
     return jsonify({"code": 1, "id": id})
 
 if __name__ == '__main__':
