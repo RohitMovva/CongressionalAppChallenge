@@ -305,8 +305,14 @@ signupForm.addEventListener("submit", function (e) {
     const username = document.getElementById("fname").value;
     const password = document.getElementById("lname").value;
     const repeated_password = document.getElementById("rlname").value;
+    if (username == "" || password == "" || repeated_password == ""){
+        document.getElementById("error").innerHTML = "Please fill out all fields!";
+        entriesv2.forEach((entry) =>{
+            entry.target.classList.add('showv2');
+        });
+        return;
+    }
     if (password != repeated_password){
-        console.log("not equal!");
         document.getElementById("error").innerHTML = "Passwords do not match!";
         entriesv2.forEach((entry) =>{
             entry.target.classList.add('showv2');
