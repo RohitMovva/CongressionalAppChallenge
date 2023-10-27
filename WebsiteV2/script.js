@@ -186,8 +186,8 @@ myForm.addEventListener("submit", function (e) {
 if (loginForm != null){
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const username= document.getElementById("fname").value;
-    const password= document.getElementById("lname").value;
+    const username = document.getElementById("fname").value;
+    const password = document.getElementById("lname").value;
     console.log(username);
     fetch('http://127.0.0.1:5000/api/login', {
         method: 'POST',
@@ -202,12 +202,13 @@ loginForm.addEventListener("submit", function (e) {
     })
     .then(response => response.json())
     .then((data) => {
-        if (!data.passed){
+        if (data.code == 0){
             console.log("HEY");
             document.getElementById("error").innerHTML = "Invalid username or password";
             return;
         }
         id = data.id;
+        console.log("redirecting\n");
         document.location.href = "index.html";
     })
     .catch(error => {
@@ -219,9 +220,8 @@ loginForm.addEventListener("submit", function (e) {
 if (signupForm != null){
 signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    
-    const username= document.getElementById("fname").value;
-    const password= document.getElementById("lname").value;
+    const username = document.getElementById("fname").value;
+    const password = document.getElementById("lname").value;
     console.log(username);
     fetch('http://127.0.0.1:5000/api/create-account', {
         method: 'POST',
@@ -236,8 +236,11 @@ signupForm.addEventListener("submit", function (e) {
     })
     .then(response => response.json())
     .then((data) => {
-        if (data.code === -1){
+        console.log(data.code)
+        if (data.code == -1){
             document.getElementById("error").innerHTML = "Username already in use!";
+            console.log("already in use!\n");
+            return;
         }
         id = data.id;
         document.location.href = "index.html";
