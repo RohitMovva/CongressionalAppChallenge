@@ -389,12 +389,12 @@ footer {
 }
 
 .display {
-    font-size:16vh;
+    font-size:20vh;
     text-align: left;
     color: white;
     position: absolute;
     top: 15%;
-    left: 15%;
+    left: 10%;
     transform: translate(-15%, -15%);
 }
 
@@ -441,6 +441,6 @@ form.loginform {
 
 @media (max-width:1250px){
     .display{
-        font-size:10vw
+        font-size:12.5vw
     }
 }
