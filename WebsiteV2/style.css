@@ -374,3 +374,26 @@ footer {
 .showv2 {
     display: block;
 }
+
+/* login stuff */
+
+.login {
+    display: grid;
+    background-color: #E04852;
+    height: 100vh;
+    width: 100vw;
+}
+
+.display {
+    margin: 0;
+    padding: 0;
+    float: left;
+    font-size: 8rem;
+    text-align: left;
+}
+
+.login .rounded-box {
+    position: absolute;
+    place-self: center;
+    padding: 8vw 4vw;
+}
