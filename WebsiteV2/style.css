@@ -389,7 +389,7 @@ footer {
 }
 
 .display {
-    font-size: 9rem;
+    font-size:16vh;
     text-align: left;
     color: white;
     position: absolute;
@@ -418,4 +418,9 @@ p.error {
     padding: 3px;
     text-align: center;
     border: 1px solid #f3bb1b;
+}
+@media (max-width:1250px){
+    .display{
+        font-size:10vw
+    }
 }
