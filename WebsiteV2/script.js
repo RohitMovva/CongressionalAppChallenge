@@ -265,6 +265,14 @@ loginForm.addEventListener("submit", function (e) {
 
     const username = document.getElementById("fname").value;
     const password = document.getElementById("lname").value;
+
+    if (username == "" || password == ""){
+        document.getElementById("error").innerHTML = "Please fill out all fields!";
+        entriesv2.forEach((entry) =>{
+            entry.target.classList.add('showv2');
+        });
+        return;
+    }
     fetch('http://127.0.0.1:5000/api/login', {
         method: 'POST',
         headers: {
