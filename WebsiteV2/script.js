@@ -1,4 +1,13 @@
 var entriesv2 = null;
+var id;
+console.log(sessionStorage.getItem("id"));
+console.log("Stored id")
+if (sessionStorage.getItem("id") == null) {
+    id = -1;
+} else {
+    id = sessionStorage.getItem("id");
+}
+// var id = -1;
 
 window.onload = function() {
     var myElements = document.querySelectorAll('.my-class');
@@ -24,11 +33,80 @@ window.onload = function() {
     myElements.forEach((el) => observer.observe(el));
 };
 
+document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+	const dropZoneElement = inputElement.closest(".drop-zone");
 
+	dropZoneElement.addEventListener("click", (e) => {
+		inputElement.click();
+	});
+
+	inputElement.addEventListener("change", (e) => {
+		if (inputElement.files.length) {
+			updateThumbnail(dropZoneElement, inputElement.files[0]);
+		}
+	});
+
+	dropZoneElement.addEventListener("dragover", (e) => {
+		e.preventDefault();
+		dropZoneElement.classList.add("drop-zone--over");
+	});
+
+	["dragleave", "dragend"].forEach((type) => {
+		dropZoneElement.addEventListener(type, (e) => {
+			dropZoneElement.classList.remove("drop-zone--over");
+		});
+	});
+
+	dropZoneElement.addEventListener("drop", (e) => {
+		e.preventDefault();
+
+		if (e.dataTransfer.files.length) {
+			inputElement.files = e.dataTransfer.files;
+			updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+		}
+
+		dropZoneElement.classList.remove("drop-zone--over");
+	});
+});
+
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+function updateThumbnail(dropZoneElement, file) {
+	let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+	// First time - remove the prompt
+	if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+		dropZoneElement.querySelector(".drop-zone__prompt").remove();
+	}
+
+	// First time - there is no thumbnail element, so lets create it
+	if (!thumbnailElement) {
+		thumbnailElement = document.createElement("div");
+		thumbnailElement.classList.add("drop-zone__thumb");
+		dropZoneElement.appendChild(thumbnailElement);
+	}
+
+	thumbnailElement.dataset.label = file.name;
+
+	// Show thumbnail for image files
+	if (file.type.startsWith("image/")) {
+		const reader = new FileReader();
+
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+		};
+	} else {
+		thumbnailElement.style.backgroundImage = null;
+	}
+}
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) =>{
-        console.log(entry)
         entry.target.classList.toggle('show', entry.isIntersecting);
     });
 });
@@ -37,7 +115,6 @@ const observer = new IntersectionObserver((entries) => {
 
 const myFunction = function(entries) {
     entries.forEach((entry) => {
-        console.log(entry);
         entry.target.classList.add("hidden");
     });
 };
@@ -66,21 +143,17 @@ if (csvFile == null){
 // if (myForm == null){
 //     myForm = -1;
 // }
-var id = -1;
 var classes = [];
 var datar = "";
-csvFile.onchange = function(){
-    entriesv2.forEach((entry) =>{
-        console.log(entry)
-        entry.target.classList.toggle('showv2');
-    });
 
+csvFile.onchange = function(){
     // e.preventDefault();
     const input = csvFile.files[0];
     const reader = new FileReader();
     reader.onload = function (e) {
         const text = e.target.result;
         datar = text;
+        console.log(id + " <-id");
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
@@ -93,6 +166,13 @@ csvFile.onchange = function(){
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data.code);
+            if (data.code == 0){
+                return;
+            }
+            entriesv2.forEach((entry) =>{
+                entry.target.classList.toggle('showv2');
+            });
             document.getElementById("response").innerText = data.message;
             classes = data.class_list;
             // UPDATE THE FORM HERE
@@ -119,19 +199,14 @@ csvFile.onchange = function(){
                 drop.appendChild(option);
                 add.appendChild(clone);
 
-                console.log(classes[i])
-                console.log(dropdown);
                 // list.appendChild(li);
             }
-            console.log(classes);
         })
         .catch(error => {
             console.error("Error fetching data: ", error);
             document.getElementById("response").innerText = "Error fetching data!";
         });
     };
-    console.log(datar);
-    console.log(classes);
     reader.readAsText(input);
 };
 
@@ -150,7 +225,6 @@ myForm.addEventListener("submit", function (e) {
         }
         schedule.push(i.childNodes[0].wholeText);
     }
-    console.log(schedule);
 
 
     fetch('http://127.0.0.1:5000/api/upload-all', {
@@ -168,6 +242,7 @@ myForm.addEventListener("submit", function (e) {
     })
     .then(response => response.json())
     .then((data) => {
+        console.log(data.code);
         const new_schedule = data.new_schedule;
         const schedule_container = document.getElementById("schedule_container");
         schedule_container.innerHTML = '';
@@ -188,7 +263,6 @@ loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const username = document.getElementById("fname").value;
     const password = document.getElementById("lname").value;
-    console.log(username);
     fetch('http://127.0.0.1:5000/api/login', {
         method: 'POST',
         headers: {
@@ -201,19 +275,21 @@ loginForm.addEventListener("submit", function (e) {
         }),
     })
     .then(response => response.json())
-    .then((data) => {
+    .then(data => {
         if (data.code == 0){
-            console.log("HEY");
             document.getElementById("error").innerHTML = "Invalid username or password";
             return;
         }
         id = data.id;
-        console.log("redirecting\n");
+        sessionStorage.setItem("id", id);
+        console.log(id + " <-rid");
+        console.log(sessionStorage.getItem("id"))
         document.location.href = "index.html";
     })
     .catch(error => {
         console.error('Error', error);
     });
+    console.log(id + " <-bid");
 })}
 
 
@@ -222,7 +298,6 @@ signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const username = document.getElementById("fname").value;
     const password = document.getElementById("lname").value;
-    console.log(username);
     fetch('http://127.0.0.1:5000/api/create-account', {
         method: 'POST',
         headers: {
@@ -239,13 +314,18 @@ signupForm.addEventListener("submit", function (e) {
         console.log(data.code)
         if (data.code == -1){
             document.getElementById("error").innerHTML = "Username already in use!";
-            console.log("already in use!\n");
             return;
         }
+        console.log(id);
         id = data.id;
+        // Store
+        sessionStorage.setItem("id", id);
         document.location.href = "index.html";
+        console.log(id + " <- rid");
+
     })
     .catch(error => {
         console.error('Error', error);
     });
+    console.log(id + " <- bid");
 })}
