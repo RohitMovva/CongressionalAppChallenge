@@ -261,8 +261,18 @@ myForm.addEventListener("submit", function (e) {
 if (loginForm != null){
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    console.log("login form!");
+
     const username = document.getElementById("fname").value;
     const password = document.getElementById("lname").value;
+
+    if (username == "" || password == ""){
+        document.getElementById("error").innerHTML = "Please fill out all fields!";
+        entriesv2.forEach((entry) =>{
+            entry.target.classList.add('showv2');
+        });
+        return;
+    }
     fetch('http://127.0.0.1:5000/api/login', {
         method: 'POST',
         headers: {
@@ -278,6 +288,9 @@ loginForm.addEventListener("submit", function (e) {
     .then(data => {
         if (data.code == 0){
             document.getElementById("error").innerHTML = "Invalid username or password";
+            entriesv2.forEach((entry) =>{
+                entry.target.classList.add('showv2');
+            });
             return;
         }
         id = data.id;
@@ -296,8 +309,24 @@ loginForm.addEventListener("submit", function (e) {
 if (signupForm != null){
 signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    console.log("signup form!");
     const username = document.getElementById("fname").value;
     const password = document.getElementById("lname").value;
+    const repeated_password = document.getElementById("rlname").value;
+    if (username == "" || password == "" || repeated_password == ""){
+        document.getElementById("error").innerHTML = "Please fill out all fields!";
+        entriesv2.forEach((entry) =>{
+            entry.target.classList.add('showv2');
+        });
+        return;
+    }
+    if (password != repeated_password){
+        document.getElementById("error").innerHTML = "Passwords do not match!";
+        entriesv2.forEach((entry) =>{
+            entry.target.classList.add('showv2');
+        });
+        return;
+    }
     fetch('http://127.0.0.1:5000/api/create-account', {
         method: 'POST',
         headers: {
@@ -314,6 +343,9 @@ signupForm.addEventListener("submit", function (e) {
         console.log(data.code)
         if (data.code == -1){
             document.getElementById("error").innerHTML = "Username already in use!";
+            entriesv2.forEach((entry) =>{
+                entry.target.classList.add('showv2');
+            });
             return;
         }
         console.log(id);
@@ -322,6 +354,7 @@ signupForm.addEventListener("submit", function (e) {
         sessionStorage.setItem("id", id);
         document.location.href = "index.html";
         console.log(id + " <- rid");
+
 
     })
     .catch(error => {
