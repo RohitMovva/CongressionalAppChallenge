@@ -397,17 +397,13 @@ footer {
 }
 
 .display {
-    font-size:20vh;
+    font-size: 9rem;
     text-align: left;
     color: white;
     position: absolute;
     top: 15%;
-    left: 10%;
+    left: 15%;
     transform: translate(-15%, -15%);
-}
-
-@media screen and (max-width: 800px) {
-
 }
 
 .login .rounded-box {
@@ -430,6 +426,7 @@ p.error {
 
 form.loginform {
     display: grid;
+    margin-top: 30px;
 }
 
 .submit {
@@ -495,8 +492,8 @@ form.loginform {
 	text-align: center;
 }
 
-@media (max-width:1250px){
-    .display{
-        font-size:12.5vw
+@media (max-height: 800px){
+    .tohide {
+        display: none;
     }
 }
