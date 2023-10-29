@@ -13,11 +13,152 @@
 </head>
 
 <body id="top">
-    <nav>
-        <ul>
-            <li><a href="#top"><img src="Images/shuffle256.png" alt="Logo"></a></li>
-        </ul>
-    </nav>
+    <a href="index.html"><img src="Images/shuffle256.png" alt="Logo"
+            style="height: 38px; position: absolute; top: 15px; right: 15px;"></a>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">Schedule change one</a>
+        <a href="#">Schedule Change two</a>
+        <a href="#">Change New Schedule</a>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+        <div class="padding">
+            <div class="dashboard">
+                <section class="last-change">
+                    <div class="rounded-box bigbox">
+                        <div style="display: grid; place-items: center;">
+                            <h2 style="margin-top: 0;">Latest Schedule</h2>
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td><h3 class="accent">1</h3></td>
+                                    <td>Wind Symphony Honnors</td>
+                                    <td>Spicer</td>
+                                    <td>Band Room</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">2</h3></td>
+                                    <td>AP Computer Science</td>
+                                    <td>Hettmensperger</td>
+                                    <td>RM###</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">3</h3></td>
+                                    <td>Algebra II Honors</td>
+                                    <td>Tarbutton</td>
+                                    <td>RM###</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">4</h3></td>
+                                    <td>Spanish 35 Honnors</td>
+                                    <td>Mathewes</td>
+                                    <td>RM###</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">5</h3></td>
+                                    <td>Biology I Honnors</td>
+                                    <td>Sessions</td>
+                                    <td>RM###</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">6</h3></td>
+                                    <td>World Literature</td>
+                                    <td>Rhodes</td>
+                                    <td>RM###</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">7</h3></td>
+                                    <td>Innovations</td>
+                                    <td>Letter</td>
+                                    <td>INN</td>
+                                </tr>
+                                <tr>
+                                    <td><h3 class="accent">8</h3></td>
+                                    <td>AP Human Geology</td>
+                                    <td>Miles</td>
+                                    <td>RM###</td>
+                                </tr>
+                            </table>
+                            <!-- <div class="twogrid">
+                                <div class="box a">
+                                    <h3 class="accent">1</h3>
+                                    <p>Wind Symphony Honnors, Spicer, Band Room</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">2</h3>
+                                    <p>AP Computer Science, Hetmensperger rm####</p>
+                                </div>
+                            </div>
+                            <div class="twogrid">
+                                <div class="box a">
+                                    <h3 class="accent">3</h3>
+                                    <p>Algebra II Honors, Tarbutton, rm####</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">4</h3>
+                                    <p>Spanish 35 Honnors, Matheews, rm####</p>
+                                     I know this is spelled wrong help
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">5</h3>
+                                    <p>Biology I Honnors, Sessions, rm####</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">6</h3>
+                                    <p>World Literature, Rhodes, rm####</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">7</h3>
+                                    <p>Innovations, Letter, Inn</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">8</h3>
+                                    <p>AP Human Geology, Miles, rm####</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <p>Once you start changing scheudles you can see the latest one here</p>
+                    </div>
+                </section>
+                </section>
+                <section class="profile">
+                    <div class="rounded-box bigbox">
+                        <div style="display: grid; place-items: center;">
+                            <h2 style="margin-top: 0;">How does it work?</h2>
+                            <img src="Images/lightbulb.png" alt="lightbulb" class="icon">
+                        </div>
+                        <div>
+                            <div class="twogrid">
+                                <div class="box a">
+                                    <h3 class="accent">1</h3>
+                                    <p>Upload class list as a .csv file with each column being course name, teacher,
+                                        room,
+                                        period, count, and max number of students.</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">2</h3>
+                                    <p>Select which class you have for each period.</p>
+                                </div>
+                            </div>
+                            <div class="twogrid">
+                                <div class="box a">
+                                    <h3 class="accent">3</h3>
+                                    <p>Select the class to remove and the class to add.</p>
+                                </div>
+                                <div class="box a">
+                                    <h3 class="accent">4</h3>
+                                    <p>Hit submit to recieve your new schedule!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

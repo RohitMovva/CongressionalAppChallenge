@@ -33,6 +33,16 @@ window.onload = function() {
     myElements.forEach((el) => observer.observe(el));
 };
 
+function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+  }
+
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 	const dropZoneElement = inputElement.closest(".drop-zone");
 
