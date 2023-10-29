@@ -113,7 +113,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    font-size: 110%;
+    color: gray;
     transition: 200ms;
 }
 
@@ -169,6 +169,11 @@ header p a {
     margin: 50px 0 0;
 }
 
+div.buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 section.content {
     display: grid;
     margin: auto;
@@ -211,12 +216,12 @@ iframe {
     height: auto;
 }
 
-.fancy {
+.accent {
     color: #E04852;
 }
 
 .primary {
-    color: #4073A5;
+    color: #D01273;
 }
 
 li.grey {
@@ -248,6 +253,11 @@ li.grey {
 .rounded-box {
     background-color: #E0DFD1;
     border-radius: 20px;
+}
+
+.primary-back {
+    color: #fefdf8;
+    background-color: #E04852;
 }
 
 footer {
@@ -538,3 +548,5 @@ div.rounded-box a img {
         display: none;
     }
 }
+
+/* Dashboard */
