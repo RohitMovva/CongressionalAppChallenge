@@ -156,10 +156,8 @@ header p {
 }
 
 header p:hover {
-    font-size: 110%;
     background-color: beige;
     cursor: pointer;
-    transition: 400ms;
 }
 
 header p a {
@@ -581,7 +579,7 @@ div.rounded-box a img {
 
 .openbtn {
     cursor: pointer;
-    background-color: white;
+    background-color: transparent;
     border: none;
     padding: 0;
     position: fixed;
@@ -592,9 +590,8 @@ div.rounded-box a img {
 .openbtn img,
 .closebtn img {
     width: 38px;
+    transition: 200ms;
 }
-
-.openbtn:hover {}
 
 #main {
     transition: margin-left .5s;
@@ -625,7 +622,7 @@ div.rounded-box a img {
     transform: rotate(135deg);
 }
 
-.content {
+.collapsible-content {
     padding: 0 18px;
     max-height: 0;
     overflow: hidden;
@@ -685,10 +682,6 @@ table {
     border-collapse: collapse;
 }
 
-tr {}
-
-tr td:nth-child(1) {}
-
 td {
     padding: 10px;
 }
@@ -707,4 +700,12 @@ tr:nth-child(-n + 7) td {
             margin: 0;
         }
     }
+}
+
+.boop {
+    transition: 200ms;
+}
+
+.boop:hover {
+    transform: translate(0, -4px);
 }
