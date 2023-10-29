@@ -555,22 +555,18 @@ div.rounded-box a img {
     height: 100%;
     width: 0;
     position: fixed;
+    background-color: #f7f7f7;
+    border-radius: 0 20px 0 20px;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 64px;
 }
 
-.sidebar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+.sidebarContent {
+    padding: 20px;
 }
 
 .sidebar a:hover {
@@ -579,28 +575,68 @@ div.rounded-box a img {
 
 .sidebar .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+    top: 15px;
+    left: 15px;
 }
 
 .openbtn {
-    font-size: 20px;
     cursor: pointer;
-    background-color: #111;
-    color: white;
-    padding: 10px 15px;
+    background-color: white;
     border: none;
+    padding: 0;
+    position: fixed;
+    top: 15px;
+    left: 15px;
 }
 
-.openbtn:hover {
-    background-color: #444;
+.openbtn img,
+.closebtn img {
+    width: 38px;
 }
+
+.openbtn:hover {}
 
 #main {
     transition: margin-left .5s;
     padding: 16px;
+}
+
+.collapsible {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-bottom: 5px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.collapsible:nth-child(-n + 4) {
+    /* Rohit, 4 needs to be a var which is number of past schedules * 2 */
+    border-bottom: 1px solid black;
+}
+
+.active .plus, .collapsible:hover .plus {
+    transform: rotate(135deg);
+}
+
+.content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.plus {
+    font-weight: 900;
+    font-size: 2em;
+    float: right;
+    transition: .5s;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
