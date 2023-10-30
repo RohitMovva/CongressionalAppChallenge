@@ -314,7 +314,7 @@ footer {
 }
 
 .hiddenv2 {
-    /* display: none; */
+    display: none;
 }
 
 .showv2 {
@@ -329,8 +329,27 @@ footer {
 
 /* Form stuff */
 
+#cform {
+    background-color: #E04852; 
+}
+
+.padding2 {
+    padding: 0 8vw;
+}
+
+.dropdown_container {
+    background-color: white;
+    height: 100vh;
+        font-family: 'Poppins';
+
+}
+
+
 .dropdownselect {
     border-radius: 5px;
+        background-color: white;
+    font-family: 'Poppins';
+
     border: 1px solid #c0bdbd;
     padding: 10px;
     width: 100%;
@@ -338,13 +357,16 @@ footer {
 
 .dropdown {
     position: relative;
+        background-color: white;
+    font-family: 'Poppins';
+
     display: inline-block;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    font-family: 'Poppins';
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -352,6 +374,7 @@ footer {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-align: center;
 }
 
 .dropdown-content:hover {
@@ -391,13 +414,21 @@ footer {
 }
 
 .greenBorder:before {
-    background-color: #4D9078;
+    background-color: #2bb673;
     color: #fefdf8;
 }
 
 .theforcols {
-    background-color: #f1f1f1;
+    background-color: white;
     width: 80vw;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.thetwocols {
+    background-color: white;
+    width: 30vw;
+    min-width: fit-content;
     padding: 20px;
     border-radius: 10px;
 }
@@ -409,7 +440,16 @@ footer {
     padding: 10px;
 }
 
-.twocol {}
+.twocol {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5%;
+    padding: 10px;
+}
+
+.twocol div select {
+    width: fit-content;
+}
 
 /* login stuff */
 
@@ -497,54 +537,6 @@ form.loginform {
     padding: 10px;
     font-family: 'Poppins';
     font-weight: 400;
-}
-
-.drop-zone {
-    max-width: 200px;
-    height: 200px;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    cursor: pointer;
-    color: #cccccc;
-    border: 4px dashed #009578;
-    border-radius: 10px;
-}
-
-.drop-zone--over {
-    border-style: solid;
-}
-
-.drop-zone__input {
-    display: none;
-}
-
-.drop-zone__thumb {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #cccccc;
-    background-size: cover;
-    position: relative;
-}
-
-.drop-zone__thumb::after {
-    content: attr(data-label);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 5px 0;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.75);
-    font-size: 14px;
-    text-align: center;
 }
 
 div.rounded-box a img {
