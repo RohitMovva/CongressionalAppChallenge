@@ -13,88 +13,78 @@
 </head>
 
 <body id="top">
-    <!-- <div class="drop-zone">
-            <span class="drop-zone__prompt">Drop file here or click to upload</span>
-            <input type="file" accept=".csv" name="myFile" class="drop-zone__input">
-        </div> -->
-        <form id="submit_info" class="center dropdown_container">
-            <input type="file" id="csvFile" accept=".csv" class="hiddenv2 showv2 file" required>
+    <form id="submit_info" class="dropdown_container">
+        <input type="file" id="csvFile" accept=".csv" class="hiddenv2 showv2 file" required>
+        <div class="theforcols">
+            <div class="fourcol">
+                <div class="dropdown hiddenv2">
+                    <select id="period1" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
     
-            <br />
+                <div class="dropdown hiddenv2">
+                    <select id="period2" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
     
-            <div class="dropdown hiddenv2">
-                <select id="period1" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
-            </div><br />
+                <div class="dropdown hiddenv2">
+                    <select id="period3" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
     
-            <div class="dropdown hiddenv2">
-                <select id="period2" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
-            </div><br />
-    
-            <div class="dropdown hiddenv2">
-                <select id="period3" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
-            </div><br />
-    
-            <div class="dropdown hiddenv2">
-                <select id="period4" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
-            </div><br />
-    
-            <div class="dropdown hiddenv2">
-                <select id="period5" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
-            </div><br />
-    
-            <div class="dropdown hiddenv2">
-                <select id="period6" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
+                <div class="dropdown hiddenv2">
+                    <select id="period4" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
             </div>
     
-            <br />
+            <div class="fourcol">
+                <div class="dropdown hiddenv2">
+                    <select id="period5" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
     
-            <div class="dropdown hiddenv2">
-                <select id="period7" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
+                <div class="dropdown hiddenv2">
+                    <select id="period6" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
+    
+                <div class="dropdown hiddenv2">
+                    <select id="period7" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
+    
+                <div class="dropdown hiddenv2">
+                    <select id="period8" class="dropdownselect" required>
+                        <option class="dropdown-content" value="0">Select class</option>
+                    </select>
+                </div>
             </div>
-    
-            <br>
-    
-            <div class="dropdown hiddenv2">
-                <select id="period8" class="dropdownselect" required>
-                    <option class="dropdown-content" value="0">Select class</option>
-                </select>
-            </div>
-    
-            <br>
-    
+        </div>
+
+        <div class="twocol">
             <div class="dropdown hiddenv2">
                 <select id="dropped_course" class="dropdownselect" required>
                     <option class="dropdown-content" value="0">Select class to drop</option>
                 </select>
             </div>
     
-            <br>
-    
             <div class="dropdown hiddenv2">
                 <select id="added_course" class="dropdownselect" required>
                     <option class="dropdown-content" value="0">Select class to add</option>
                 </select>
             </div>
-    
-            <br>
-    
-            <input type="submit" id="submit" value="Submit" class="submit hiddenv2">
-            <p id="response"></p>
-        </form>
+        </div>
+        <input type="submit" id="submit" value="Submit" class="submit hiddenv2">
+        <p id="response"></p>
+    </form>
     <div id="schedule_container">
 
     </div>

@@ -355,6 +355,7 @@ var datar = "";
 
 csvFile.onchange = function () {
     // e.preventDefault();
+    csvFile.classList.add("greenBorder")
     if (id == null){
         document.location.href = "login.html";
         return;

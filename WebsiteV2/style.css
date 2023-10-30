@@ -313,52 +313,27 @@ footer {
     }
 }
 
-/* Form stuff */
+.hiddenv2 {
+    /* display: none; */
+}
 
-#dropdown_container {
-    width: 100vw;
-    background-color: red;
+.showv2 {
+    display: block;
+}
+
+.dropdown_container {
     display: grid;
     place-items: center;
-    margin: auto;
-}
-
-.file {
-    color: transparent;
-    width: 100%;
-}
-
-.file::-webkit-file-upload-button {
-    visibility: hidden;
-}
-
-.file::before {
-    content: 'Upload Class List to Continue';
-    font-family: 'Poppins';
-    background-color: #f1f1f1;
-    display: inline-block;
-    color: black;
-    font-size: 3rem;
     padding: 20px;
-    border-radius: 10px;
 }
 
-.file:hover::before {
-    cursor: pointer;
-}
-
-.dropbtn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-}
+/* Form stuff */
 
 .dropdownselect {
     border-radius: 5px;
     border: 1px solid #c0bdbd;
     padding: 10px;
+    width: 100%;
 }
 
 .dropdown {
@@ -373,16 +348,13 @@ footer {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-}
-
-.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content:hover {
     background-color: #ddd;
 }
 
@@ -390,17 +362,54 @@ footer {
     display: block;
 }
 
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+.file {
+    color: transparent;
+    display: grid;
+    place-items: center;
+    width: 100%;
 }
 
-.hiddenv2 {
-    /* display: none; */
+.file::-webkit-file-upload-button {
+    visibility: hidden;
 }
 
-.showv2 {
-    display: block;
+.file::before {
+    content: 'Upload Class List to Continue';
+    font-family: 'Poppins';
+    background-color: #f1f1f1;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    color: black;
+    font-size: 3rem;
+    padding: 20px;
+    border-radius: 10px;
 }
+
+.file:hover::before {
+    cursor: pointer;
+}
+
+.greenBorder:before {
+    background-color: #4D9078;
+    color: #fefdf8;
+}
+
+.theforcols {
+    background-color: #f1f1f1;
+    width: 80vw;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.fourcol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 5%;
+    padding: 10px;
+}
+
+.twocol {}
 
 /* login stuff */
 
