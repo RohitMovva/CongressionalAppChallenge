@@ -102,11 +102,11 @@ def upload_form():
         return jsonify({"code": 0, "message": "Failure!"})
     # data = request.get_json()
     name = request.get_json()["file_text"]
-    print("hi")
     return jsonify({"code": 1, "message": "Success!", "class_list": process_form(name)})
 
 @app.route('/api/upload-all', methods=['POST'])
 def get_shortest_switches():
+    print("Called")
     id = load_object("id.pkl")
     if (id == None):
         return jsonify({"code": 0, "message": "Failure!"})
@@ -212,15 +212,12 @@ def get_courses():
     id = load_object("id.pkl")
     
     if (id == None or int(id[0]) != int(frontend_id)):
-        print("id bad")
         return jsonify({"code": -1})
     raw_class_list = request.get_json()['classes']
     class_list = [[] for _ in range(8)]
     for line in raw_class_list.split("\n")[1:]:
         line = line.split(",")
         class_list[int(line[3])-1].append(line)
-    print(class_list)
-    print("hi")
 
     return jsonify({"code": 1, "classes": class_list[request.get_json()['period']]})
 

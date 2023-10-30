@@ -4,7 +4,7 @@ var myForm = document.getElementById("myForm");
 const loginForm = document.getElementById("login_form");
 const signupForm = document.getElementById("signup_form");
 const dashboard = document.getElementById("dashboard");
-const form = document.getElementById("courseChangeForm.html");
+const submitInfo = document.getElementById("submit_info");
 var csvFile = document.getElementById("csvFile");
 if (sessionStorage.getItem("id") == null) {
     id = -1;
@@ -364,7 +364,7 @@ csvFile.onchange = function () {
     const reader = new FileReader();
     reader.onload = function (e) {
         const text = e.target.result;
-        // datar = text;
+        datar = text;
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
@@ -413,12 +413,22 @@ csvFile.onchange = function () {
     reader.readAsText(input);
 };
 
-if (myForm != null) {
-    myForm.addEventListener("submit", function (e) {
+if (submitInfo != null) {
+    submitInfo.addEventListener("submit", function (e) {
         e.preventDefault();
+        console.log("entered listener\n");
         const added_course = document.querySelector('#added_course').value;
         const dropped_course = document.querySelector('#dropped_course').value;
         const class_list = datar;
+        // for (let i = 0; i < 8; i++){
+        //     if (document.querySelector("#period" + (i+1) == "Select Class")){
+        //         console.log("didn't fill out all of it");
+        //         document.getElementById("result") = "Please fill out all fields";
+        //         return;
+        //     }
+        //     class_list.push(document.querySelector("#period" + (i+1)).value)
+        // }
+        console.log(class_list);
         // const schedule = [];
 
         // const optcontainer = document.getElementById("checkboxes");
@@ -429,11 +439,12 @@ if (myForm != null) {
         //     schedule.push(i.childNodes[0].wholeText);
         // }
 
-        const schedule = [document.getElementById("period1").wholeText, document.getElementById("period2").wholeText, document.getElementById("period3").wholeText,
-        document.getElementById("period4").wholeText, document.getElementById("period5").wholeText, document.getElementById("period6").wholeText,
-        document.getElementById("period7").wholeText, document.getElementById("period8").wholeText];
+        const schedule = [document.getElementById("period1").value, document.getElementById("period2").value, document.getElementById("period3").value,
+        document.getElementById("period4").value, document.getElementById("period5").value, document.getElementById("period6").value,
+        document.getElementById("period7").value, document.getElementById("period8").value];
 
         for (i = 0; i < schedule.length; i++){
+            schedule[i] = schedule[i].split(", ", 1)[0];
             if (schedule[i] == "Select Class"){
                 document.getElementById("result").innerText = "Please select all courses!";
                 return;
@@ -602,7 +613,7 @@ function loadDropdowns(){
                         document.location.href = "index.html";
                     }
                     console.log(data.classes);
-                    document.getElementById('dropdown_container');
+                    document.getElementById('submit_info');
                     var curr_field = document.getElementById("period" + (i+1));
                     curr_field.classList.add('showv2');
                     console.log(curr_field);

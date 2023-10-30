@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Rescheduler</title>
+    <title>Change Schedule</title>
     <link rel="apple-touch-icon" sizes="180x180" href="Images/shuffle256.png">
     <link rel="icon" type="image/png" sizes="32x32" href="Images/shuffle32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="Images/shuffle16.png">
@@ -18,7 +18,7 @@
             <input type="file" accept=".csv" name="myFile" class="drop-zone__input">
         </div> -->
     <div class="padding center">
-        <form id="dropdown_container">
+        <form id="submit_info">
             <input type="file" id="csvFile" accept=".csv" class="hiddenv2 showv2" required>
 
             <br />
@@ -93,7 +93,7 @@
 
             <br>
 
-            <input type="submit" value="Submit" class="submit">
+            <input type="submit" id="submit" value="Submit" class="submit">
             <p id="response"></p>
         </form>
     </div>
