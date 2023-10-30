@@ -654,13 +654,16 @@ table h3 {
     margin: 0;
 }
 
-.added {
+.added h3{
     color: #4D9078;
 }
 
-
 .moved {
     color: #3C91E6;
+}
+
+.removed h3 {
+    color: #E04852;
 }
 
 .plus {
@@ -716,11 +719,11 @@ tr:nth-child(-n + 7) td {
     border-bottom: 1px solid black;
 }
 
-tr.removed td {
+tr.added td {
     border-bottom: 3px solid #E04852;
 }
 
-tr.removed:last-child td {
+tr.added:last-child td {
     border-top: #E04852;
     border-bottom: none;
 }
