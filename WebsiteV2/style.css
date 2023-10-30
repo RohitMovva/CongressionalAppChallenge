@@ -314,7 +314,7 @@ footer {
 }
 
 .hiddenv2 {
-    display: none;
+    display: none !important;
 }
 
 .showv2 {
@@ -333,6 +333,16 @@ footer {
     background-color: #E04852; 
 }
 
+#formpart2 {
+    display: grid;
+    place-items: center;
+}
+
+.center4ig {
+    display: grid !important;
+    place-items: center !important;
+}
+
 .padding2 {
     padding: 0 8vw;
 }
@@ -340,14 +350,13 @@ footer {
 .dropdown_container {
     background-color: white;
     height: 100vh;
-        font-family: 'Poppins';
-
+    font-family: 'Poppins';
 }
 
 
 .dropdownselect {
     border-radius: 5px;
-        background-color: white;
+    background-color: white;
     font-family: 'Poppins';
 
     border: 1px solid #c0bdbd;
@@ -357,9 +366,8 @@ footer {
 
 .dropdown {
     position: relative;
-        background-color: white;
+    background-color: white;
     font-family: 'Poppins';
-
     display: inline-block;
 }
 
@@ -431,6 +439,7 @@ footer {
     min-width: fit-content;
     padding: 20px;
     border-radius: 10px;
+    margin: auto;
 }
 
 .fourcol {
