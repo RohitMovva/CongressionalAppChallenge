@@ -12,30 +12,35 @@
     <script src="script.js" defer></script>
 </head>
 
-<body id="top">
-    <form id="submit_info" class="dropdown_container">
+<body id="cform">
+    <div class="padding2">
+        <form id="submit_info" class="dropdown_container">
         <input type="file" id="csvFile" accept=".csv" class="hiddenv2 showv2 file" required>
         <div class="theforcols">
             <div class="fourcol">
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P1:</h4>
                     <select id="period1" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
     
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P2:</h4>
                     <select id="period2" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
     
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P3:</h4>
                     <select id="period3" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
     
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P4:</h4>
                     <select id="period4" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
@@ -44,31 +49,35 @@
     
             <div class="fourcol">
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P5:</h4>
                     <select id="period5" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
     
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P6:</h4>
                     <select id="period6" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
     
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P7:</h4>
                     <select id="period7" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
     
                 <div class="dropdown hiddenv2">
+                    <h4 style="margin: 0; padding 0; margin-bottom: 5px;" class="accent">P8:</h4>
                     <select id="period8" class="dropdownselect" required>
                         <option class="dropdown-content" value="0">Select class</option>
                     </select>
                 </div>
             </div>
         </div>
-
+        <div class="thetwocols">
         <div class="twocol">
             <div class="dropdown hiddenv2">
                 <select id="dropped_course" class="dropdownselect" required>
@@ -82,11 +91,13 @@
                 </select>
             </div>
         </div>
+        </div>
         <input type="submit" id="submit" value="Submit" class="submit hiddenv2">
         <p id="response"></p>
     </form>
     <div id="schedule_container">
 
+    </div>
     </div>
 </body>
 
