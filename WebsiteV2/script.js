@@ -4,7 +4,7 @@ var myForm = document.getElementById("myForm");
 const loginForm = document.getElementById("login_form");
 const signupForm = document.getElementById("signup_form");
 const dashboard = document.getElementById("dashboard");
-const form = document.getElementById("formformattest");
+const form = document.getElementById("courseChangeForm.html");
 var csvFile = document.getElementById("csvFile");
 if (sessionStorage.getItem("id") == null) {
     id = -1;
