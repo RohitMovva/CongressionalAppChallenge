@@ -14,6 +14,7 @@ if (sessionStorage.getItem("id") == null) {
 // var id = -1;
 
 window.onload = function () {
+    
     var myElements = document.querySelectorAll('.my-class');
 
     // Create an array of IntersectionObserverEntry objects
@@ -238,80 +239,6 @@ function closeNav() {
     document.getElementById("mySidebar").classList.toggle("openSidebar");
 }
 
-// js for dropzone
-
-document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-    const dropZoneElement = inputElement.closest(".drop-zone");
-
-    dropZoneElement.addEventListener("click", (e) => {
-        inputElement.click();
-    });
-
-    inputElement.addEventListener("change", (e) => {
-        if (inputElement.files.length) {
-            updateThumbnail(dropZoneElement, inputElement.files[0]);
-        }
-    });
-
-    dropZoneElement.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropZoneElement.classList.add("drop-zone--over");
-    });
-
-    ["dragleave", "dragend"].forEach((type) => {
-        dropZoneElement.addEventListener(type, (e) => {
-            dropZoneElement.classList.remove("drop-zone--over");
-        });
-    });
-
-    dropZoneElement.addEventListener("drop", (e) => {
-        e.preventDefault();
-
-        if (e.dataTransfer.files.length) {
-            inputElement.files = e.dataTransfer.files;
-            updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-        }
-
-        dropZoneElement.classList.remove("drop-zone--over");
-    });
-});
-
-/**
- * Updates the thumbnail on a drop zone element.
- *
- * @param {HTMLElement} dropZoneElement
- * @param {File} file
- */
-function updateThumbnail(dropZoneElement, file) {
-    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-
-    // First time - remove the prompt
-    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-        dropZoneElement.querySelector(".drop-zone__prompt").remove();
-    }
-
-    // First time - there is no thumbnail element, so lets create it
-    if (!thumbnailElement) {
-        thumbnailElement = document.createElement("div");
-        thumbnailElement.classList.add("drop-zone__thumb");
-        dropZoneElement.appendChild(thumbnailElement);
-    }
-
-    thumbnailElement.dataset.label = file.name;
-
-    // Show thumbnail for image files
-    if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-        };
-    } else {
-        thumbnailElement.style.backgroundImage = null;
-    }
-}
-
 // scroll effects
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -327,20 +254,6 @@ const myFunction = function (entries) {
     });
 };
 
-// checkbox dropdown java
-var expanded = false;
-
-function showCheckboxes() {
-    var checkboxes = document.getElementById("checkboxes");
-    if (!expanded) {
-        checkboxes.style.display = "block";
-        expanded = true;
-    } else {
-        checkboxes.style.display = "none";
-        expanded = false;
-    }
-}
-
 // to backend
 
 if (csvFile == null) {
@@ -355,7 +268,10 @@ var datar = "";
 
 csvFile.onchange = function () {
     // e.preventDefault();
-    csvFile.classList.add("greenBorder")
+    // csvFile.classList.add("greenBorder");
+    csvFile.classList.remove("file");
+    csvFile.classList.add("hiddenv2");
+    csvFile.nextSibling.nextSibling.classList.remove("hiddenv2");
     if (id == null){
         document.location.href = "login.html";
         return;
@@ -615,8 +531,8 @@ function loadDropdowns(){
                     }
                     console.log(data.classes);
                     document.getElementById('submit_info');
-                    var curr_field = document.getElementById("period" + (i+1));
-                    curr_field.classList.add('showv2');
+                    var curr_field = document.getElementById("formpart2");
+                    curr_field.classList.remove('hiddenv2');
                     console.log(curr_field);
                     for (j = 0; j < data.classes.length; j++){
                         var new_option = document.createElement("option");
@@ -630,6 +546,7 @@ function loadDropdowns(){
         }
     };
     reader.readAsText(input);
+    
 }
 
 
