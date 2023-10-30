@@ -364,14 +364,14 @@ csvFile.onchange = function () {
     const reader = new FileReader();
     reader.onload = function (e) {
         const text = e.target.result;
-        datar = text;
+        // datar = text;
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "username": datar,
+                "file_text": text,
                 "id": id
             })
         })
@@ -381,37 +381,29 @@ csvFile.onchange = function () {
                     document.location.href = "login.html";
                     return;
                 }
+                // entriesv2.forEach((entry) => {
+                //     entry.target.classList.toggle('showv2');
+                // });
                 entriesv2.forEach((entry) => {
-                    entry.target.classList.toggle('showv2');
+                    entry.target.classList.add('showv2');
                 });
-                document.getElementById("response").innerText = data.message;
-                classes = data.class_list;
-                // UPDATE THE FORM HERE
-
-                let dropdown = document.getElementById("checkboxes");
+                const classes = data.class_list;
+                console.log(classes.length);
                 let drop = document.getElementById("dropped_course");
                 let add = document.getElementById("added_course");
                 for (i = 0; i < classes.length; i++) {
-                    let label = document.createElement('label');
-                    let input = document.createElement('input');
-                    input.type = 'checkbox';
-                    input.id = String.fromCharCode(i);
-                    label.innerText = classes[i];
-                    input.for = i;
-                    label.appendChild(input);
-                    dropdown.appendChild(label);
-
                     let option = document.createElement('option');
                     option.class = "dropdown-content";
                     option.value = classes[i];
                     option.innerText = classes[i];
+                    console.log(classes[i], " help");
                     let clone = option.cloneNode(true);
 
                     drop.appendChild(option);
                     add.appendChild(clone);
-
-                    // list.appendChild(li);
                 }
+                loadDropdowns();
+                
             })
             .catch(error => {
                 console.error("Error fetching data: ", error);
@@ -427,14 +419,25 @@ if (myForm != null) {
         const added_course = document.querySelector('#added_course').value;
         const dropped_course = document.querySelector('#dropped_course').value;
         const class_list = datar;
-        const schedule = [];
+        // const schedule = [];
 
-        const optcontainer = document.getElementById("checkboxes");
-        for (const i of optcontainer.childNodes) {
-            if (!i.childNodes[1].checked) {
-                continue;
+        // const optcontainer = document.getElementById("checkboxes");
+        // for (const i of optcontainer.childNodes) {
+        //     if (!i.childNodes[1].checked) {
+        //         continue;
+        //     }
+        //     schedule.push(i.childNodes[0].wholeText);
+        // }
+
+        const schedule = [document.getElementById("period1").wholeText, document.getElementById("period2").wholeText, document.getElementById("period3").wholeText,
+        document.getElementById("period4").wholeText, document.getElementById("period5").wholeText, document.getElementById("period6").wholeText,
+        document.getElementById("period7").wholeText, document.getElementById("period8").wholeText];
+
+        for (i = 0; i < schedule.length; i++){
+            if (schedule[i] == "Select Class"){
+                document.getElementById("result").innerText = "Please select all courses!";
+                return;
             }
-            schedule.push(i.childNodes[0].wholeText);
         }
 
 
@@ -574,11 +577,14 @@ if (signupForm != null) {
 }
 
 function loadDropdowns(){
+    console.log("loading dropdowns...");
     const input = csvFile.files[0];
     const reader = new FileReader();
     reader.onload = function (e) {
         const text = e.target.result;
-        for (i = 0; i < 8; i++){
+        // console.log("PLEASE");
+        for (let i = 0; i < 8; i++){
+            console.log(i + " THIS IS I")
             fetch('http://127.0.0.1:5000/api/get-courses-in-period', {
                 method: 'POST',
                 headers: {
@@ -592,16 +598,27 @@ function loadDropdowns(){
             })
             .then(response => response.json())
                 .then((data) => {
+                    if (data.code == -1){
+                        document.location.href = "index.html";
+                    }
+                    console.log(data.classes);
                     document.getElementById('dropdown_container');
-                    for (i = 0; i < data.classes.length; i++){
-                        // do stuff
+                    var curr_field = document.getElementById("period" + (i+1));
+                    curr_field.classList.add('showv2');
+                    console.log(curr_field);
+                    for (j = 0; j < data.classes.length; j++){
+                        var new_option = document.createElement("option");
+                        new_option.innerText = data.classes[j][0] + ", " + data.classes[j][1];
+                        curr_field.appendChild(new_option);
                     }
                 })
                 .catch(error => {
                     console.error('Error', error);
             });
         }
-        
-    }
+    };
+    reader.readAsText(input);
 }
+
+
 
