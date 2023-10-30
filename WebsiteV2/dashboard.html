@@ -14,7 +14,7 @@
 
 <body id="top">
     <a href="index.html"><img class="boop" src="Images/shuffle256.png" alt="Logo"
-            style="height: 38px; position: fixed; top: 15px; right: 15px;"></a>
+            style="height: 38px; position: fixed; top: 15px; right: 15px; z-index: 2;"></a>
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="Images/menu.png"
                 alt="Menu icon"></a>
@@ -176,120 +176,89 @@
     </div>
 
     <div id="main">
-        <button class="openbtn" onclick="openNav()"><img src="Images/menu.png" alt="Menu icon"></button>
-        <div class="padding">
-            <div class="dashboard">
-                <section class="last-change">
-                    <div class="rounded-box bigbox">
-                        <div style="display: grid; place-items: center;">
-                            <h2 style="margin-top: 0;">Latest Schedule</h2>
-                        </div>
-                        <div id="latest_schedule">
-                            <!-- <table>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">1</h3>
-                                    </td>
-                                    <td>Wind Symphony Honnors</td>
-                                    <td>Spicer</td>
-                                    <td>Band Room</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">2</h3>
-                                    </td>
-                                    <td>AP Computer Science</td>
-                                    <td>Hettmensperger</td>
-                                    <td>RM###</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">3</h3>
-                                    </td>
-                                    <td>Algebra II Honors</td>
-                                    <td>Tarbutton</td>
-                                    <td>RM###</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">4</h3>
-                                    </td>
-                                    <td>Spanish 35 Honnors</td>
-                                    <td>Mathewes</td>
-                                    <td>RM###</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">5</h3>
-                                    </td>
-                                    <td>Biology I Honnors</td>
-                                    <td>Sessions</td>
-                                    <td>RM###</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">6</h3>
-                                    </td>
-                                    <td>World Literature</td>
-                                    <td>Rhodes</td>
-                                    <td>RM###</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">7</h3>
-                                    </td>
-                                    <td>Innovations</td>
-                                    <td>Letter</td>
-                                    <td>INN</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3 class="accent">8</h3>
-                                    </td>
-                                    <td>AP Human Geology</td>
-                                    <td>Miles</td>
-                                    <td>RM###</td>
-                                </tr>
-                            </table> -->
-                        </div>
-                        <p>Once you start changing scheudles you can see the latest one here</p>
+        <div class="dashboard y-scroll">
+            <section class="last-change">
+                <button class="openbtn" onclick="openNav()"><img src="Images/menu.png" alt="Menu icon"></button>
+                <div class="rounded-box bigbox">
+                    <div style="display: grid; place-items: center;">
+                        <h2 style="margin-top: 0;">Latest Schedule</h2>
                     </div>
-                </section>
-                </section>
-                <section class="profile">
-                    <div class="rounded-box bigbox">
-                        <div style="display: grid; place-items: center;">
-                            <h2 style="margin-top: 0;">How does it work?</h2>
-                            <img src="Images/lightbulb.png" alt="lightbulb" class="icon">
-                        </div>
-                        <div>
-                            <div class="twogrid" id="schedule_container">
-                                <div class="box a">
+                    <div id="latest_schedule">
+                        <!-- <table>
+                            <tr>
+                                <td>
                                     <h3 class="accent">1</h3>
-                                    <p>Upload class list as a .csv file with each column being course name, teacher,
-                                        room,
-                                        period, count, and max number of students.</p>
-                                </div>
-                                <div class="box a">
+                                </td>
+                                <td>Wind Symphony Honnors</td>
+                                <td>Spicer</td>
+                                <td>Band Room</td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <h3 class="accent">2</h3>
-                                    <p>Select which class you have for each period.</p>
-                                </div>
-                            </div>
-                            <div class="twogrid">
-                                <div class="box a">
+                                </td>
+                                <td>AP Computer Science</td>
+                                <td>Hettmensperger</td>
+                                <td>RM###</td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <h3 class="accent">3</h3>
-                                    <p>Select the class to remove and the class to add.</p>
-                                </div>
-                                <div class="box a">
+                                </td>
+                                <td>Algebra II Honors</td>
+                                <td>Tarbutton</td>
+                                <td>RM###</td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <h3 class="accent">4</h3>
-                                    <p>Hit submit to recieve your new schedule!</p>
-                                </div>
-                            </div>
-                        </div>
+                                </td>
+                                <td>Spanish 35 Honnors</td>
+                                <td>Mathewes</td>
+                                <td>RM###</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3 class="accent">5</h3>
+                                </td>
+                                <td>Biology I Honnors</td>
+                                <td>Sessions</td>
+                                <td>RM###</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3 class="accent">6</h3>
+                                </td>
+                                <td>World Literature</td>
+                                <td>Rhodes</td>
+                                <td>RM###</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3 class="accent">7</h3>
+                                </td>
+                                <td>Innovations</td>
+                                <td>Letter</td>
+                                <td>INN</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3 class="accent">8</h3>
+                                </td>
+                                <td>AP Human Geology</td>
+                                <td>Miles</td>
+                                <td>RM###</td>
+                            </tr>
+                        </table> -->
                     </div>
-                </section>
+                    <p>Once you start changing scheudles you can see the latest one here</p>
+                </div>
+            </section>
+            <div>
+                <h1 class="display flipped" style="float: right;">Course<br>Resch<br>edue<br class="tohide">ler</h1>
             </div>
         </div>
+    </div>
     </div>
 </body>
 
