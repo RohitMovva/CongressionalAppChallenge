@@ -315,6 +315,38 @@ footer {
 
 /* Form stuff */
 
+#dropdown_container {
+    width: 100vw;
+    background-color: red;
+    display: grid;
+    place-items: center;
+    margin: auto;
+}
+
+.file {
+    color: transparent;
+    width: 100%;
+}
+
+.file::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.file::before {
+    content: 'Upload Class List to Continue';
+    font-family: 'Poppins';
+    background-color: #f1f1f1;
+    display: inline-block;
+    color: black;
+    font-size: 3rem;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.file:hover::before {
+    cursor: pointer;
+}
+
 .dropbtn {
     background-color: #04AA6D;
     color: white;
@@ -362,48 +394,8 @@ footer {
     background-color: #3e8e41;
 }
 
-.multiselect {
-    width: 200px;
-}
-
-.selectBox {
-    position: relative;
-}
-
-.selectBox select {
-    width: 100%;
-    font-weight: bold;
-}
-
-.overSelect {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-
-#checkboxes {
-    display: none;
-    background-color: white;
-    position: absolute;
-    border: 1px #dadada solid;
-    height: 300px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    z-index: 5;
-}
-
-#checkboxes label {
-    display: block;
-}
-
-#checkboxes label:hover {
-    background-color: #1e90ff;
-}
-
 .hiddenv2 {
-    display: none;
+    /* display: none; */
 }
 
 .showv2 {
