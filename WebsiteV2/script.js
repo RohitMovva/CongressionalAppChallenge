@@ -218,7 +218,8 @@ var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
+  coll[i].addEventListener("click", function(e) {
+    e.preventDefault();
     this.classList.toggle("active");
     var content = this.nextElementSibling;
     if (content.style.maxHeight){
@@ -240,41 +241,44 @@ function closeNav() {
 
 // js for dropzone
 
-document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-    const dropZoneElement = inputElement.closest(".drop-zone");
+// document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+//     const dropZoneElement = inputElement.closest(".drop-zone");
 
-    dropZoneElement.addEventListener("click", (e) => {
-        inputElement.click();
-    });
+//     dropZoneElement.addEventListener("click", function(e) {
+//         e.preventDefault();
+//         inputElement.click();
+//     });
 
-    inputElement.addEventListener("change", (e) => {
-        if (inputElement.files.length) {
-            updateThumbnail(dropZoneElement, inputElement.files[0]);
-        }
-    });
+//     inputElement.addEventListener("change", function(e) {
+//         e.preventDefault();
+//         if (inputElement.files.length) {
+//             updateThumbnail(dropZoneElement, inputElement.files[0]);
+//         }
+//     });
 
-    dropZoneElement.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropZoneElement.classList.add("drop-zone--over");
-    });
+//     dropZoneElement.addEventListener("dragover", function(e) {
+//         e.preventDefault();
+//         dropZoneElement.classList.add("drop-zone--over");
+//     });
 
-    ["dragleave", "dragend"].forEach((type) => {
-        dropZoneElement.addEventListener(type, (e) => {
-            dropZoneElement.classList.remove("drop-zone--over");
-        });
-    });
+//     ["dragleave", "dragend"].forEach((type) => {
+//         dropZoneElement.addEventListener(type, (e) => {
+//             e.preventDefault();
+//             dropZoneElement.classList.remove("drop-zone--over");
+//         });
+//     });
 
-    dropZoneElement.addEventListener("drop", (e) => {
-        e.preventDefault();
+//     dropZoneElement.addEventListener("drop", function(e) {
+//         e.preventDefault();
 
-        if (e.dataTransfer.files.length) {
-            inputElement.files = e.dataTransfer.files;
-            updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-        }
+//         if (e.dataTransfer.files.length) {
+//             inputElement.files = e.dataTransfer.files;
+//             updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+//         }
 
-        dropZoneElement.classList.remove("drop-zone--over");
-    });
-});
+//         dropZoneElement.classList.remove("drop-zone--over");
+//     });
+// });
 
 /**
  * Updates the thumbnail on a drop zone element.
@@ -361,11 +365,13 @@ csvFile.onchange = function () {
         return;
         // document.getElementById("response").innerText = "Error fetching data!";
     }
+    
     const input = csvFile.files[0];
     const reader = new FileReader();
     reader.onload = function (e) {
         const text = e.target.result;
         datar = text;
+        console.log(id);
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
@@ -379,7 +385,7 @@ csvFile.onchange = function () {
             .then(response => response.json())
             .then(data => {
                 if (data.code == 0) {
-                    document.location.href = "login.html";
+                    // document.location.href = "login.html";
                     return;
                 }
                 // entriesv2.forEach((entry) => {
@@ -445,13 +451,15 @@ if (submitInfo != null) {
         document.getElementById("period7").value, document.getElementById("period8").value];
 
         for (i = 0; i < schedule.length; i++){
-            schedule[i] = schedule[i].split(", ", 1)[0];
+            // schedule[i] = schedule[i].split(", ", 1);
             if (schedule[i] == "Select Class"){
                 document.getElementById("result").innerText = "Please select all courses!";
                 return;
             }
+            schedule[i] += ", " + i;
         }
-
+        console.log("SCHEDULE:");
+        console.log(schedule);
 
         fetch('http://127.0.0.1:5000/api/upload-all', {
             method: 'POST',
@@ -468,18 +476,20 @@ if (submitInfo != null) {
         })
             .then(response => response.json())
             .then((data) => {
+                console.log(data.code);
                 if (data.code == 0){
                     document.location.href = "login.html";
                     return;
                 }
-                const new_schedule = data.new_schedule;
-                const schedule_container = document.getElementById("schedule_container");
-                schedule_container.innerHTML = '';
-                for (i = 0; i < 8; i++) {
-                    let label = document.createElement('p');
-                    label.innerHTML = new_schedule[i];
-                    schedule_container.appendChild(label);
-                }
+                document.location.href = "dashboard.html";
+                // const new_schedule = data.new_schedule;
+                // const schedule_container = document.getElementById("schedule_container");
+                // schedule_container.innerHTML = '';
+                // for (i = 0; i < 8; i++) {
+                //     let label = document.createElement('p');
+                //     label.innerHTML = new_schedule[i];
+                //     schedule_container.appendChild(label);
+                // }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -525,6 +535,7 @@ if (loginForm != null) {
                 }
                 id = data.id;
                 sessionStorage.setItem("id", id);
+                console.log("ididd", id);
                 document.location.href = "index.html";
             })
             .catch(error => {
@@ -631,6 +642,3 @@ function loadDropdowns(){
     };
     reader.readAsText(input);
 }
-
-
-

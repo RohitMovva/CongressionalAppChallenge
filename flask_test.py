@@ -62,17 +62,33 @@ def shortestPath(classes, schedule, original_schedule, new_schedule):
 
 def getPath(classes, schedule, added_class, dropped_class, username):
     # new_schedule = [-1 for _ in range(8)]
-    schedule[schedule.index(dropped_class)] = added_class
-    # new_schedule = [-1 for _ in range(8)]
-    new_schedule = shortestPath(classes, schedule, schedule, [-1 for _ in range(8)])[0]
-    new_schedule = [i[1][0:4] for i in new_schedule]
+    only_classes = []
+    all_info = []
+    print("classes", classes)
+    for i in schedule:
+        subthing = i.split(", ")
+        only_classes.append(subthing[0])
+        # all_info.append(classes.index)
+        for j in classes[int(subthing[2])]:
+            print(j[0], subthing[1][0])
+            print(j[1], subthing[1][1])
+            if j[1][0] == subthing[0] and j[1][1] == subthing[1]:
+                all_info.append(j[1])
+                break
+    print("only classes: ", only_classes)
+    print("all info: ", all_info)
 
+    only_classes[only_classes.index(dropped_class)] = added_class
+    # new_schedule = [-1 for _ in range(8)]
+    new_schedule = shortestPath(classes, only_classes, only_classes, [-1 for _ in range(8)])[0]
+    # print("new_schedule", new_schedule)
+    new_schedule = [i[1][0:4] for i in new_schedule]
     past_schedules = load_object("past_schedules.pkl")
     if (past_schedules == None):
         past_schedules = {}
     if (username not in past_schedules):
         past_schedules[username] = []
-    past_schedules[username].append((schedule, new_schedule))
+    past_schedules[username].append((all_info, new_schedule))
     save_object("past_schedules.pkl", past_schedules)
     return new_schedule
 
@@ -92,15 +108,22 @@ def hello(class_string):
 
 @app.route('/api/upload-form', methods=['POST'])
 def upload_form():
+    
     id = load_object("id.pkl")
     if (id == None):
+        print("a")
         return jsonify({"code": 0, "message": "Failure!"})
     id = id[0]
+    print("frontend id", int(request.get_json()["id"]))
+    print("backend id", id)
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
+        print("b")
         return jsonify({"code": 0, "message": "Failure!"})
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
+        print("c")
         return jsonify({"code": 0, "message": "Failure!"})
     # data = request.get_json()
+    print("d")
     name = request.get_json()["file_text"]
     return jsonify({"code": 1, "message": "Success!", "class_list": process_form(name)})
 
@@ -181,12 +204,14 @@ def get_latest_schedule():
     username = id[1]
     id = id[0]
     latest_schedule = load_object("past_schedules.pkl")
-    if (len(latest_schedule) == "0"):
+    print(latest_schedule)
+    if (latest_schedule == None or len(latest_schedule) == 0):
         return jsonify({"code": 0})
     return jsonify({"code": 1, "schedule": latest_schedule[username][-1][1]})
 
 @app.route("/api/get-schedules", methods=['Post'])
 def get_schedules():
+    print("ENTERED")
     frontend_id = request.get_json()['id']
     id = load_object("id.pkl")
     if (id == None or int(id[0]) != int(frontend_id)):
@@ -194,10 +219,11 @@ def get_schedules():
     username = id[1]
     id = id[0]
     latest_schedule = load_object("past_schedules.pkl")
-    if (len(latest_schedule) == "0"):
+    if (latest_schedule == None or len(latest_schedule) == 0):
         return jsonify({"code": 0})
     parsed_schedules = []
     latest_schedule[username].reverse()
+    print(latest_schedule)
     for i in latest_schedule[username]:
         parsed_schedules.append([])
         for j in range (0, 8):
