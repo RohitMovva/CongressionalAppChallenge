@@ -14,6 +14,7 @@ if (sessionStorage.getItem("id") == null) {
 // var id = -1;
 
 window.onload = function () {
+    
     var myElements = document.querySelectorAll('.my-class');
 
     // Create an array of IntersectionObserverEntry objects
@@ -331,20 +332,6 @@ const myFunction = function (entries) {
     });
 };
 
-// checkbox dropdown java
-var expanded = false;
-
-function showCheckboxes() {
-    var checkboxes = document.getElementById("checkboxes");
-    if (!expanded) {
-        checkboxes.style.display = "block";
-        expanded = true;
-    } else {
-        checkboxes.style.display = "none";
-        expanded = false;
-    }
-}
-
 // to backend
 
 if (csvFile == null) {
@@ -359,7 +346,10 @@ var datar = "";
 
 csvFile.onchange = function () {
     // e.preventDefault();
-    csvFile.classList.add("greenBorder")
+    // csvFile.classList.add("greenBorder");
+    csvFile.classList.remove("file");
+    csvFile.classList.add("hiddenv2");
+    csvFile.nextSibling.nextSibling.classList.remove("hiddenv2");
     if (id == null){
         document.location.href = "login.html";
         return;
@@ -626,8 +616,8 @@ function loadDropdowns(){
                     }
                     console.log(data.classes);
                     document.getElementById('submit_info');
-                    var curr_field = document.getElementById("period" + (i+1));
-                    curr_field.classList.add('showv2');
+                    var curr_field = document.getElementById("formpart2");
+                    curr_field.classList.remove('hiddenv2');
                     console.log(curr_field);
                     for (j = 0; j < data.classes.length; j++){
                         var new_option = document.createElement("option");
@@ -641,4 +631,5 @@ function loadDropdowns(){
         }
     };
     reader.readAsText(input);
+    
 }
