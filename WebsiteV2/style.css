@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Proza+Libre&display=swap');
 
+:root {
+    --schdTwo: 0;
+}
 
 * {
     box-sizing: border-box;
@@ -560,15 +563,19 @@ div.rounded-box a img {
     left: 0;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 64px;
 }
 
 .sidebarContent {
     padding: 20px;
+    padding-top: 64px;
 }
 
-.sidebar a:hover {
-    color: #f1f1f1;
+#mySidebar:not(.openSidebar) .sidebarContent {
+    position: absolute;
+}
+
+.openSidebar {
+    width: 40vw;
 }
 
 .sidebar .closebtn {
@@ -613,8 +620,8 @@ div.rounded-box a img {
     line-height: 1rem;
 }
 
-.collapsible:nth-child(-n + 4) {
-    /* Rohit, 4 needs to be a var which is number of past schedules * 2 */
+.collapsible:nth-child(-n + 3):not(.active) {
+    /* Rohit, 4 needs to be a var which is number of past schedules * 2 - 1 */
     border-bottom: 1px solid black;
 }
 
@@ -629,6 +636,33 @@ div.rounded-box a img {
     transition: max-height 0.2s ease-out;
 }
 
+.collapsible-content table {
+    min-width: fit-content;
+    color: gray;
+}
+
+table h3 {
+    color: gray;
+}
+
+.x-scroll {
+    max-height: 50vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0;
+}
+
+.added {
+    color: #4D9078;
+}
+
+
+.moved {
+    color: #3C91E6;
+}
+
 .plus {
     font-weight: 900;
     font-size: 2em;
@@ -637,15 +671,7 @@ div.rounded-box a img {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidebar {
-        padding-top: 15px;
-    }
 
-    .sidebar a {
-        font-size: 18px;
-    }
-}
 
 .dashboard {
     display: grid;
@@ -690,6 +716,21 @@ tr:nth-child(-n + 7) td {
     border-bottom: 1px solid black;
 }
 
+tr.removed td {
+    border-bottom: 3px solid #E04852;
+}
+
+tr.removed:last-child td {
+    border-top: #E04852;
+    border-bottom: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .openSidebar {
+        width: 80vw;
+    }
+}
+
 @media screen and (max-width: 1100px) {
     .dashboard {
         display: block;
@@ -698,6 +739,9 @@ tr:nth-child(-n + 7) td {
     @media screen and (max-width: 800px) {
         #main .padding {
             margin: 0;
+        }
+        .openSidebar {
+            width: 100vw;
         }
     }
 }

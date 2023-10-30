@@ -33,6 +33,12 @@ window.onload = function () {
     myElements.forEach((el) => observer.observe(el));
 };
 
+var pastSheds = 4;
+// past schedules times two
+function getPastSchedulesTimesTwo() {
+    return pastSheds;
+}
+
 // colapsible 
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -51,13 +57,11 @@ for (i = 0; i < coll.length; i++) {
 
 // open and close navbar
 function openNav() {
-    document.getElementById("mySidebar").style.width = "40vw";
-    document.getElementById("main").style.marginLeft = "40vw";
+    document.getElementById("mySidebar").classList.toggle("openSidebar");
 }
 
 function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
+    document.getElementById("mySidebar").classList.toggle("openSidebar");
 }
 
 // js for dropzone
