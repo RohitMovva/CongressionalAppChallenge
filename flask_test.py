@@ -2,13 +2,10 @@
 import random
 import sys
 from flask import Flask, jsonify, request
-from flask_cors import CORS  # <-- Import CORS
+from flask_cors import CORS
 import pickle
-# import bruteForceShortestPath
 app = Flask(__name__)
-CORS(app)  # <-- Enable CORS for the app
-
-# id = -1
+CORS(app)
 
 def load_object(filename):
     try:
@@ -31,7 +28,6 @@ def save_object(filename, data):
 def shortestPath(classes, schedule, original_schedule, new_schedule):
     # print(new_schedule)
     n = len(schedule)
-    print("new call: ", new_schedule)
     if (n == 0):
         print("Finished")
         return (new_schedule, 0)
@@ -46,7 +42,7 @@ def shortestPath(classes, schedule, original_schedule, new_schedule):
             # print(classes[i][j] + " " + schedule[0])
             # if (classes[i][j] == "AP Biology"):
             #     print(i, " ", j)
-            if (classes[i][j] == schedule[0] and new_schedule[i] == -1):
+            if (classes[i][j][0] == schedule[0] and new_schedule[i] == -1):
 
                 # print("YOAOETOWA\n\n\n\n")
                 # print(classes[i][j], "trying this class")
@@ -76,19 +72,30 @@ def shortestPath(classes, schedule, original_schedule, new_schedule):
         # print("Dead end")
         return (new_schedule, 1000000)
     print(period, " ", class_loc)
-    if (original_schedule[period] != classes[period][class_loc]): # original_schedule[period] != -1 and 
+    if (original_schedule[period] != classes[period][class_loc][0]): # original_schedule[period] != -1 and 
         lowval += 1
 
     return (new_schedule, lowval)
 
-def getPath(classes, schedule, added_class, dropped_class):
+def getPath(classes, schedule, added_class, dropped_class, username):
     # new_schedule = [-1 for _ in range(8)]
-
+    print("classes")
     schedule[schedule.index(dropped_class)] = added_class
     # new_schedule = [-1 for _ in range(8)]
     new_schedule = shortestPath(classes, schedule, schedule, [-1 for _ in range(8)])[0]
+    new_schedule = [i[1][0:4] for i in new_schedule]
     print("HEYO")
     print(new_schedule)
+
+    past_schedules = load_object("past_schedules.pkl")
+    if (past_schedules == None):
+        past_schedules = {}
+    print("passed schedules", past_schedules)
+    if (username not in past_schedules):
+        past_schedules[username] = []
+    past_schedules[username].append((schedule, new_schedule))
+    save_object("past_schedules.pkl", (past_schedules))
+    print(schedule, new_schedule)
     return new_schedule
 
 def process_form(class_list):
@@ -108,19 +115,29 @@ def hello(class_string):
 @app.route('/api/upload-form', methods=['POST'])
 def upload_form():
     id = load_object("id.pkl")
+    # print(id, " ", request.get_json()["id"])
+    if (id == None):
+        return jsonify({"code": 0, "message": "Failure!"})
+    id = id[0]
+    if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
+        return jsonify({"code": 0, "message": "Failure!"})
     # print(id == int(request.get_json()["id"]))
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
         return jsonify({"code": 0, "message": "Failure!"})
     print("MADE IT")
     data = request.get_json()
     name = data.get("username", "Guest")
-    
+    print(process_form(name), " HIHAIHC")
     return jsonify({"code": 1, "message": "Success!", "class_list": process_form(name)})
 
 @app.route('/api/upload-all', methods=['POST'])
 def get_shortest_switches():
     id = load_object("id.pkl")
     # print(id, " ", request.get_json()["id"])
+    if (id == None):
+        return jsonify({"code": 0, "message": "Failure!"})
+    username = id[1]
+    id = id[0]
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
         return jsonify({"code": 0, "message": "Failure!"})
     # print("asdigo")
@@ -129,16 +146,17 @@ def get_shortest_switches():
     for line in raw_class_list.split("\n")[1:]:
         line = line.split(",")
         # if (int(line[4]) < int(line[5][:-1])): # 4 5
-        class_list[int(line[3])-1].append(line[0])
+        class_list[int(line[3])-1].append(((line[0], line)))
     student_schedule = request.get_json()['schedule']
     added_course = request.get_json()['added_course']
     dropped_course = request.get_json()['dropped_course']
     # getPath(class_list, student_schedule, added_course, dropped_course)
-    new_schedule = getPath(class_list, student_schedule, added_course, dropped_course)
+    new_schedule = getPath(class_list, student_schedule, added_course, dropped_course, username)
     # schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
     # new_schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
+    # new_schedule = [i[1][0:4] for i in new_schedule]
     return jsonify({"code": 1, "message": "Success!", "new_schedule": new_schedule})
 
 @app.route('/api/create-account', methods=['POST'])
@@ -157,7 +175,7 @@ def create_account():
     account_dict[username] = password
     save_object("account_credentials", account_dict)
     id = random.randint(10000000, 99999999)
-    save_object("id.pkl", id)
+    save_object("id.pkl", [id, username])
     return jsonify({"code": 1, "id": id})
 
 @app.route('/api/login', methods=['POST'])
@@ -165,16 +183,84 @@ def login():
     username = request.get_json()['username']
     password = request.get_json()['password']
     account_dict = load_object("account_credentials")
+    if (account_dict == None):
+        account_dict = {}
     print(username)
     print(password)
-    print(account_dict[username])
-    if (account_dict[username] != password):
+    # print(account_dict[username])
+    if (username not in account_dict or account_dict[username] != password):
         print("breh")
         return jsonify({"code": 0, "id": -1})
     id = random.randint(10000000, 99999999)
-    save_object("id.pkl", id)
+    save_object("id.pkl", [id, username])
     print(id)
     return jsonify({"code": 1, "id": id})
+
+@app.route('/api/verify-id', methods=['POST'])
+def verify_id():
+    print("VALID CHECKING")
+    frontend_id = request.get_json()['id']
+    id = load_object("id.pkl")
+    if (id == None):
+        return jsonify({"valid": False})
+    else:
+        print(id[0], frontend_id, int(id[0])==int(frontend_id))
+        return jsonify({"valid": int(id[0])==int(frontend_id)})
+    # return jsonify({"valid": id == frontend_id})
+
+@app.route("/api/latest-schedule", methods=['POST'])
+def get_latest_schedule():
+    # return jsonify({"code": -1})
+    print("HI")
+    frontend_id = request.get_json()['id']
+    id = load_object("id.pkl")
+    if (id == None or int(id[0]) != int(frontend_id)):
+        return jsonify({"code": -1})
+    username = id[1]
+    id = id[0]
+    latest_schedule = load_object("past_schedules.pkl")
+    if (len(latest_schedule) == "0"):
+        return jsonify({"code": 0})
+    return jsonify({"code": 1, "schedule": latest_schedule[username][-1][1]})
+    # print()
+
+@app.route("/api/get-schedules", methods=['Post'])
+def get_schedules():
+    frontend_id = request.get_json()['id']
+    id = load_object("id.pkl")
+    if (id == None or int(id[0]) != int(frontend_id)):
+        return jsonify({"code": -1})
+    username = id[1]
+    id = id[0]
+    latest_schedule = load_object("past_schedules.pkl")
+    print(latest_schedule)
+    if (len(latest_schedule) == "0"):
+        return jsonify({"code": 0})
+    parsed_schedules = []
+    latest_schedule[username].reverse()
+    for i in latest_schedule[username]:
+        parsed_schedules.append([])
+        for j in range (0, 8):
+            print(i[1][j], i[0][j])
+            if (i[1][j] not in i[0][j]):
+                parsed_schedules[-1].append(i[1[j]])
+    print(parsed_schedules, "AAA")
+
+    return jsonify({"code": 1, "schedules": latest_schedule[username]})
+
+@app.route("/api/get-courses-in-period", methods=['Post'])
+def get_courses():
+    frontend_id = request.get_json()['id']
+    id = load_object("id.pkl")
+    if (id == None or int(id[0]) != int(frontend_id)):
+        return jsonify({"code": -1})
+    raw_class_list = request.get_json()['classes']
+    class_list = [[] for _ in range(8)]
+    for line in raw_class_list.split("\n")[1:]:
+        line = line.split(",")
+        class_list[int(line[3])-1].append(line)
+
+    return jsonify({"code": 1, "classes": class_list[request.get_json()['period']]})
 
 if __name__ == '__main__':
     app.run(debug=True)

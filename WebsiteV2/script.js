@@ -1,7 +1,11 @@
 var entriesv2 = null;
 var id;
-console.log(sessionStorage.getItem("id"));
-console.log("Stored id")
+var myForm = document.getElementById("myForm");
+const loginForm = document.getElementById("login_form");
+const signupForm = document.getElementById("signup_form");
+const dashboard = document.getElementById("dashboard");
+const form = document.getElementById("formformattest");
+var csvFile = document.getElementById("csvFile");
 if (sessionStorage.getItem("id") == null) {
     id = -1;
 } else {
@@ -31,7 +35,177 @@ window.onload = function () {
 
     myFunction(entriesv2);
     myElements.forEach((el) => observer.observe(el));
+    if (window.document.title == "Dashboard"){
+        loadDashboard();
+    } else if (window.document.title == "Change schedule"){
+        loadForm();
+    }
 };
+
+function loadDashboard(){
+    // console.log("dashboard validated" + String(verifyId()));
+    id = sessionStorage.getItem("id");
+    fetch('http://127.0.0.1:5000/api/verify-id', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        })
+        .then(response => response.json())
+        .then((data) => {
+            if (!data.valid){
+                document.location.href = "login.html";
+            }
+        })
+        .catch(error => {
+            console.error('Error', error);
+            return false;
+        });
+    
+    fetch('http://127.0.0.1:5000/api/latest-schedule', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        })
+        .then(response => response.json())
+        .then((data) => {
+            if (data.code == "-1"){
+                const schedule_container = document.getElementById("latest_schedule");
+                let error_label = document.createElement('label');
+                error_label.innerText = "Bad token!";
+                schedule_container.appendChild(error_label);
+                return;
+            } else if (data.code == "0"){
+                const schedule_container = document.getElementById("latest_schedule");
+                let error_label = document.createElement('label');
+                error_label.innerText = "You haven't generated a schedule change yet!";
+                schedule_container.appendChild(error_label);
+                return;
+            }
+            const schedule_container = document.getElementById("latest_schedule");
+            const schedule_table = document.createElement("table");
+            console.log(data.schedule);
+            
+            for (i in data.schedule){
+                // console.log(data.schedule[i]);
+                var new_row = document.createElement("tr");
+
+                var period = document.createElement("td");
+                var periodText = document.createElement("h3");
+                periodText.innerText = Number(i)+1;
+                period.appendChild(periodText);
+                new_row.appendChild(period);
+
+                for (let j = 0; j < 3; j++){
+                    let currinfo = document.createElement("td");
+                    currinfo.innerHTML = data.schedule[i][j];
+                    console.log(currinfo);
+                    new_row.appendChild(currinfo);
+                }
+
+                schedule_table.appendChild(new_row);
+            }
+            schedule_container.appendChild(schedule_table);
+        })
+        .catch(error => {
+            console.error('Error', error);
+            return false;
+        });
+
+    
+        fetch('http://127.0.0.1:5000/api/get-schedules', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        })
+        .then(response => response.json())
+        .then((data) => {
+            const schedules_container = document.getElementById("schedule_container");
+            if (data.code == "-1"){
+                let error_label = document.createElement('label');
+                error_label.innerText = "Bad token!";
+                schedules_container.appendChild(error_label);
+                return;
+            } else if (data.code == "0"){
+                // schedule_container = document.getElementById("latest_schedule");
+                let error_label = document.createElement('label');
+                error_label.innerText = "You haven't generated a schedule change yet!";
+                schedules_container.appendChild(error_label);
+                return;
+            }
+
+
+            // schedule_container = document.getElementById("latest_schedule");
+            console.log(data.schedule);
+            data.schedules.forEach(function (schedule, i) {
+            const schedule_table = document.createElement("table");
+            schedule.forEach(function (item, j) {
+                });
+            });
+            // for (i in data.schedule){
+            //     // console.log(data.schedule[i]);
+            //     var new_row = document.createElement("tr");
+
+            //     var period = document.createElement("td");
+            //     var periodText = document.createElement("h3");
+            //     periodText.innerText = Number(i)+1;
+            //     period.appendChild(periodText);
+            //     new_row.appendChild(period);
+
+            //     for (let j = 0; j < 3; j++){
+            //         let currinfo = document.createElement("td");
+            //         currinfo.innerHTML = data.schedule[i][j];
+            //         console.log(currinfo);
+            //         new_row.appendChild(currinfo);
+            //     }
+
+            //     schedule_table.appendChild(new_row);
+            // }
+            // schedule_container.appendChild(schedule_table);
+        })
+        .catch(error => {
+            console.error('Error', error);
+            return false;
+        });
+
+
+
+
+}
+
+function loadForm(){
+    id = sessionStorage.getItem("id");
+    fetch('http://127.0.0.1:5000/api/verify-id', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "id": id
+            }),
+        })
+        .then(response => response.json())
+        .then((data) => {
+            if (!data.valid){
+                document.location.href = "login.html";
+            }
+        })
+        .catch(error => {
+            console.error('Error', error);
+            return false;
+        });
+}
 
 // colapsible 
 var coll = document.getElementsByClassName("collapsible");
@@ -164,10 +338,7 @@ function showCheckboxes() {
 }
 
 // to backend
-var myForm = document.getElementById("myForm");
-const loginForm = document.getElementById("login_form");
-const signupForm = document.getElementById("signup_form");
-var csvFile = document.getElementById("csvFile");
+
 if (csvFile == null) {
     csvFile = -1;
 }
@@ -180,12 +351,16 @@ var datar = "";
 
 csvFile.onchange = function () {
     // e.preventDefault();
+    if (id == null){
+        document.location.href = "login.html";
+        return;
+        // document.getElementById("response").innerText = "Error fetching data!";
+    }
     const input = csvFile.files[0];
     const reader = new FileReader();
     reader.onload = function (e) {
         const text = e.target.result;
         datar = text;
-        console.log(id + " <-id");
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
@@ -198,8 +373,8 @@ csvFile.onchange = function () {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.code);
                 if (data.code == 0) {
+                    document.location.href = "login.html";
                     return;
                 }
                 entriesv2.forEach((entry) => {
@@ -274,7 +449,10 @@ if (myForm != null) {
         })
             .then(response => response.json())
             .then((data) => {
-                console.log(data.code);
+                if (data.code == 0){
+                    document.location.href = "login.html";
+                    return;
+                }
                 const new_schedule = data.new_schedule;
                 const schedule_container = document.getElementById("schedule_container");
                 schedule_container.innerHTML = '';
@@ -283,7 +461,6 @@ if (myForm != null) {
                     label.innerHTML = new_schedule[i];
                     schedule_container.appendChild(label);
                 }
-                console.log("success")
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -296,7 +473,6 @@ if (myForm != null) {
 if (loginForm != null) {
     loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        console.log("login form!");
 
         const username = document.getElementById("fname").value;
         const password = document.getElementById("lname").value;
@@ -330,14 +506,11 @@ if (loginForm != null) {
                 }
                 id = data.id;
                 sessionStorage.setItem("id", id);
-                console.log(id + " <-rid");
-                console.log(sessionStorage.getItem("id"))
                 document.location.href = "index.html";
             })
             .catch(error => {
                 console.error('Error', error);
             });
-        console.log(id + " <-bid");
     })
 }
 
@@ -345,7 +518,6 @@ if (loginForm != null) {
 if (signupForm != null) {
     signupForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        console.log("signup form!");
         const username = document.getElementById("fname").value;
         const password = document.getElementById("lname").value;
         const repeated_password = document.getElementById("rlname").value;
@@ -371,12 +543,12 @@ if (signupForm != null) {
             body: JSON.stringify({
                 "username": username,
                 "password": password,
+                // "repeated_password": repeated_password,
                 "id": id
             }),
         })
             .then(response => response.json())
             .then((data) => {
-                console.log(data.code)
                 if (data.code == -1) {
                     document.getElementById("error").innerHTML = "Username already in use!";
                     entriesv2.forEach((entry) => {
@@ -384,18 +556,48 @@ if (signupForm != null) {
                     });
                     return;
                 }
-                console.log(id);
                 id = data.id;
                 // Store
                 sessionStorage.setItem("id", id);
                 document.location.href = "index.html";
-                console.log(id + " <- rid");
 
 
             })
             .catch(error => {
                 console.error('Error', error);
             });
-        console.log(id + " <- bid");
     })
 }
+
+function loadDropdowns(){
+    const input = csvFile.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const text = e.target.result;
+        for (i = 0; i < 8; i++){
+            fetch('http://127.0.0.1:5000/api/get-courses-in-period', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "classes": text,
+                    "id": id,
+                    "period": i
+                }),
+            })
+            .then(response => response.json())
+                .then((data) => {
+                    document.getElementById('dropdown_container');
+                    for (i = 0; i < data.classes.length; i++){
+                        // do stuff
+                    }
+                })
+                .catch(error => {
+                    console.error('Error', error);
+            });
+        }
+        
+    }
+}
+
