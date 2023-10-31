@@ -543,12 +543,14 @@ if (submitInfo != null) {
         })
             .then(response => response.json())
             .then((data) => {
+                console.log("code" + data.code)
                 if (data.code == 0){
                     document.location.href = "login.html";
                     return;
                 } else if (data.code == -1){
-                    document.getElementById("error").innerText("Impossible to make this change, sorry!")
-                    document.getElementById("error").classList.remove("hiddenv2");
+                    var error_field = document.getElementById("error");
+                    error_field.innerText = "Impossible to make this change, sorry!";
+                    error_field.classList.remove("hiddenv2");
                 } else {
                     document.location.href = "dashboard.html";
                 }

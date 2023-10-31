@@ -77,6 +77,8 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     only_classes[only_classes.index(dropped_class)] = added_class
     # new_schedule = [-1 for _ in range(8)]
     new_schedule = shortestPath(classes, only_classes, only_classes, [-1 for _ in range(8)])[0]
+    if (-1 in new_schedule):
+        return new_schedule
     new_schedule = [i[1][0:4] for i in new_schedule]
     past_schedules = load_object("past_schedules.pkl")
     if (past_schedules == None):
@@ -88,8 +90,7 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     date_time = timestamp.strftime("%m/%d/%Y")
     # strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
     past_schedules[username].append((all_info, new_schedule, date_time))
-    if (-1 not in new_schedule):
-        save_object("past_schedules.pkl", past_schedules)
+    save_object("past_schedules.pkl", past_schedules)
     return new_schedule
 
 def process_form(class_list):
