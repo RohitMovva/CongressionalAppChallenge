@@ -4,7 +4,7 @@ import sys
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import pickle
-import time
+from datetime import datetime, date
 app = Flask(__name__)
 CORS(app)
 
@@ -83,7 +83,12 @@ def getPath(classes, schedule, added_class, dropped_class, username):
         past_schedules = {}
     if (username not in past_schedules):
         past_schedules[username] = []
-    past_schedules[username].append((all_info, new_schedule))
+    timestamp = date.today()
+    # timestamp.
+    date_time = timestamp.strftime("%m/%d/%Y")
+    print(date_time)
+    # strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
+    past_schedules[username].append((all_info, new_schedule, date_time))
     save_object("past_schedules.pkl", past_schedules)
     return new_schedule
 
@@ -214,20 +219,42 @@ def get_schedules():
     for i in latest_schedule[username]:
         parsed_schedules[0].append([])
         parsed_schedules[1].append([])
+        print(i[0])
+        print(i[1])
         for j in range (0, 8):
             i[0][j] = i[0][j][0:4]
+            print(i[0][j], i[1][j])
+            # () if [x[0] == i[0][j] for x in i[1]] else print("nope")
+            flaggy = False
+            for k in i[1]:
+                if k[0] == i[0][j][0]:
+                    flaggy = True
 
-            if (i[0][j] not in i[1]):
+            flaggyv2 = False
+            for k in i[0]:
+                if k[0] == i[1][j][0]:
+                    flaggyv2 = True
+
+            if (not flaggy):
+                print("0")
                 parsed_schedules[1][-1].append(("dropped", i[0][j]))
-            else :
-                parsed_schedules[1][-1].append(("original", i[1][j]))
+            # if (i[0][j] not in i[1]):
+                
+            elif (i[0][j] == i[1][j]):
+                print("1")
+                parsed_schedules[1][-1].append(("original", i[0][j]))
+            else:
+                print("2")
+                parsed_schedules[1][-1].append(("changed", i[0][j]))
 
-            if (i[1][j] not in i[0]):
+            if (not flaggyv2):
                 parsed_schedules[0][-1].append(("added", i[1][j]))
             elif (i[1][j] != i[0][j]):
                 parsed_schedules[0][-1].append(("changed", i[1][j]))
             else:
                 parsed_schedules[0][-1].append(("same", i[1][j]))
+        parsed_schedules[0][-1].append(i[2])
+        parsed_schedules[1][-1].append(i[2])
     print(parsed_schedules)
     return jsonify({"code": 1, "schedules": parsed_schedules})
 
@@ -243,8 +270,8 @@ def get_courses():
     for line in raw_class_list.split("\n")[1:]:
         line = line.split(",")
         class_list[int(line[3])-1].append(line)
-    sorted(class_list[request.get_json()['period']])
-    return jsonify({"code": 1, "classes": class_list[request.get_json()['period']]})
+    
+    return jsonify({"code": 1, "classes": sorted(class_list[request.get_json()['period']])})
 
 if __name__ == '__main__':
     app.run(debug=True)
