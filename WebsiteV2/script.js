@@ -546,8 +546,12 @@ if (submitInfo != null) {
                 if (data.code == 0){
                     document.location.href = "login.html";
                     return;
+                } else if (data.code == -1){
+                    document.getElementById("error").innerText("Impossible to make this change, sorry!")
+                    document.getElementById("error").classList.remove("hiddenv2");
+                } else {
+                    document.location.href = "dashboard.html";
                 }
-                document.location.href = "dashboard.html";
                 // const new_schedule = data.new_schedule;
                 // const schedule_container = document.getElementById("schedule_container");
                 // schedule_container.innerHTML = '';

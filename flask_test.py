@@ -88,7 +88,8 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     date_time = timestamp.strftime("%m/%d/%Y")
     # strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
     past_schedules[username].append((all_info, new_schedule, date_time))
-    save_object("past_schedules.pkl", past_schedules)
+    if (-1 not in new_schedule):
+        save_object("past_schedules.pkl", past_schedules)
     return new_schedule
 
 def process_form(class_list):
@@ -145,6 +146,8 @@ def get_shortest_switches():
     # new_schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
     # new_schedule = [i[1][0:4] for i in new_schedule]
+    if (-1 in new_schedule):
+        return jsonify({"code": -1, "message": "Success!", "new_schedule": new_schedule})
     return jsonify({"code": 1, "message": "Success!", "new_schedule": new_schedule})
 
 @app.route('/api/create-account', methods=['POST'])
