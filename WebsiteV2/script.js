@@ -165,8 +165,10 @@ function loadDashboard(){
                     if (schedules[0][i][j][0] == "added"){
                         curritem.classList.add("added");
                     } else if (schedules[0][i][j][0] == "changed"){
-                        periodLabel.classList.add("moved");
+                        curritem.classList.add("moved");
+                        // periodLabel.classList.add("moved");
                     }
+                    console.log(schedules[0][i][j]);
                     var curritemv2 = curritem.cloneNode(true);
                     curritemv2.classlist = "";
                     var periodv2 = period.cloneNode(true);
@@ -180,10 +182,11 @@ function loadDashboard(){
                         teacherNamev2.innerText = schedules[1][i][j][1][1];
                         roomNumv2.innerText = schedules[1][i][j][1][2];
                     }
-                    console.log(schedules[1][i][j][0])
                     if (schedules[1][i][j][0] == "dropped"){
                         curritemv2.classList.add("removed");
-                        console.log(periodLabelv2);
+                    } else if (schedules[1][i][j][0] == "changed"){
+                        curritemv2.classList.add("moved");
+
                     }
 
                     period.appendChild(periodLabel);
@@ -221,7 +224,7 @@ function loadDashboard(){
 
                 var expand_button = document.createElement("button");
                 expand_button.classList.add("collapsible");
-                expand_button.innerText = "Testing...";
+                expand_button.innerText = "Created at: " + schedules[0][i][8];
                 var expand_button_label = document.createElement("span");
                 expand_button_label.classList.add("plus")
                 expand_button_label.classList.add("accent")
