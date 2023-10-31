@@ -4,6 +4,7 @@ import sys
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import pickle
+import time
 app = Flask(__name__)
 CORS(app)
 
@@ -64,24 +65,18 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     # new_schedule = [-1 for _ in range(8)]
     only_classes = []
     all_info = []
-    print("classes", classes)
     for i in schedule:
         subthing = i.split(", ")
         only_classes.append(subthing[0])
         # all_info.append(classes.index)
         for j in classes[int(subthing[2])]:
-            print(j[0], subthing[1][0])
-            print(j[1], subthing[1][1])
             if j[1][0] == subthing[0] and j[1][1] == subthing[1]:
                 all_info.append(j[1])
                 break
-    print("only classes: ", only_classes)
-    print("all info: ", all_info)
 
     only_classes[only_classes.index(dropped_class)] = added_class
     # new_schedule = [-1 for _ in range(8)]
     new_schedule = shortestPath(classes, only_classes, only_classes, [-1 for _ in range(8)])[0]
-    # print("new_schedule", new_schedule)
     new_schedule = [i[1][0:4] for i in new_schedule]
     past_schedules = load_object("past_schedules.pkl")
     if (past_schedules == None):
@@ -111,25 +106,18 @@ def upload_form():
     
     id = load_object("id.pkl")
     if (id == None):
-        print("a")
         return jsonify({"code": 0, "message": "Failure!"})
     id = id[0]
-    print("frontend id", int(request.get_json()["id"]))
-    print("backend id", id)
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
-        print("b")
         return jsonify({"code": 0, "message": "Failure!"})
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
-        print("c")
         return jsonify({"code": 0, "message": "Failure!"})
     # data = request.get_json()
-    print("d")
     name = request.get_json()["file_text"]
     return jsonify({"code": 1, "message": "Success!", "class_list": process_form(name)})
 
 @app.route('/api/upload-all', methods=['POST'])
 def get_shortest_switches():
-    print("Called")
     id = load_object("id.pkl")
     if (id == None):
         return jsonify({"code": 0, "message": "Failure!"})
@@ -204,14 +192,12 @@ def get_latest_schedule():
     username = id[1]
     id = id[0]
     latest_schedule = load_object("past_schedules.pkl")
-    print(latest_schedule)
     if (latest_schedule == None or len(latest_schedule) == 0):
         return jsonify({"code": 0})
     return jsonify({"code": 1, "schedule": latest_schedule[username][-1][1]})
 
 @app.route("/api/get-schedules", methods=['Post'])
 def get_schedules():
-    print("ENTERED")
     frontend_id = request.get_json()['id']
     id = load_object("id.pkl")
     if (id == None or int(id[0]) != int(frontend_id)):
@@ -221,16 +207,29 @@ def get_schedules():
     latest_schedule = load_object("past_schedules.pkl")
     if (latest_schedule == None or len(latest_schedule) == 0):
         return jsonify({"code": 0})
-    parsed_schedules = []
+    parsed_schedules = [[], []]
     latest_schedule[username].reverse()
-    print(latest_schedule)
+    # parsed_sched)
+    
     for i in latest_schedule[username]:
-        parsed_schedules.append([])
+        parsed_schedules[0].append([])
+        parsed_schedules[1].append([])
         for j in range (0, 8):
-            if (i[1][j] not in i[0][j]):
-                parsed_schedules[-1].append(i[1][j])
+            i[0][j] = i[0][j][0:4]
 
-    return jsonify({"code": 1, "schedules": latest_schedule[username]})
+            if (i[0][j] not in i[1]):
+                parsed_schedules[1][-1].append(("dropped", i[0][j]))
+            else :
+                parsed_schedules[1][-1].append(("original", i[1][j]))
+
+            if (i[1][j] not in i[0]):
+                parsed_schedules[0][-1].append(("added", i[1][j]))
+            elif (i[1][j] != i[0][j]):
+                parsed_schedules[0][-1].append(("changed", i[1][j]))
+            else:
+                parsed_schedules[0][-1].append(("same", i[1][j]))
+    print(parsed_schedules)
+    return jsonify({"code": 1, "schedules": parsed_schedules})
 
 @app.route("/api/get-courses-in-period", methods=['Post'])
 def get_courses():
@@ -244,7 +243,7 @@ def get_courses():
     for line in raw_class_list.split("\n")[1:]:
         line = line.split(",")
         class_list[int(line[3])-1].append(line)
-
+    sorted(class_list[request.get_json()['period']])
     return jsonify({"code": 1, "classes": class_list[request.get_json()['period']]})
 
 if __name__ == '__main__':
