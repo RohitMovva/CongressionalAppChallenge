@@ -166,9 +166,7 @@ function loadDashboard(){
                         curritem.classList.add("added");
                     } else if (schedules[0][i][j][0] == "changed"){
                         curritem.classList.add("moved");
-                        // periodLabel.classList.add("moved");
                     }
-                    console.log(schedules[0][i][j]);
                     var curritemv2 = curritem.cloneNode(true);
                     curritemv2.classlist = "";
                     var periodv2 = period.cloneNode(true);
@@ -182,6 +180,7 @@ function loadDashboard(){
                         teacherNamev2.innerText = schedules[1][i][j][1][1];
                         roomNumv2.innerText = schedules[1][i][j][1][2];
                     }
+                    console.log(schedules[1][i][j][0])
                     if (schedules[1][i][j][0] == "dropped"){
                         curritemv2.classList.add("removed");
                     } else if (schedules[1][i][j][0] == "changed"){
@@ -231,9 +230,7 @@ function loadDashboard(){
                 expand_button_label.classList.add("accent")
                 expand_button_label.innerText = "+";
                 
-
                 expand_button.appendChild(expand_button_label);
-
 
                 var labeltest = document.createElement("div");
                 labeltest.innerText = "send help";
@@ -444,7 +441,6 @@ csvFile.onchange = function () {
     reader.onload = function (e) {
         const text = e.target.result;
         datar = text;
-        console.log(datar);
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
@@ -458,7 +454,7 @@ csvFile.onchange = function () {
             .then(response => response.json())
             .then(data => {
                 if (data.code == 0) {
-                    // document.location.href = "login.html";
+                    document.location.href = "login.html";
                     return;
                 }
                 // entriesv2.forEach((entry) => {

@@ -239,7 +239,7 @@ def get_schedules():
                 print("0")
                 parsed_schedules[1][-1].append(("dropped", i[0][j]))
             # if (i[0][j] not in i[1]):
-                
+
             elif (i[0][j] == i[1][j]):
                 print("1")
                 parsed_schedules[1][-1].append(("original", i[0][j]))
@@ -270,7 +270,7 @@ def get_courses():
     for line in raw_class_list.split("\n")[1:]:
         line = line.split(",")
         class_list[int(line[3])-1].append(line)
-    
+    # sorted(class_list[request.get_json()['period']])
     return jsonify({"code": 1, "classes": sorted(class_list[request.get_json()['period']])})
 
 if __name__ == '__main__':
