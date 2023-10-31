@@ -769,3 +769,20 @@ tr.added:last-child td {
 body:has(#main) {
     background-color: #E04852;
 }
+
+.attributions {
+    background-color: #E04852;
+}
+
+.attribute {
+    background-color: white;
+    margin: 20px;
+    color: black;
+    list-style: none;
+}
+.attgrid{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 100px;
+    
+}
