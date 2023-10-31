@@ -146,13 +146,13 @@ header {
     margin: auto;
     grid-template-columns: 40% 40%;
     column-gap: 20%;
-    height: 88vh;
+    min-height: 88vh;
     place-items: center;
 }
 
 header img {
     width: 100%;
-    min-width: 390px;
+    padding-top: 20px;
     height: auto;
 }
 
