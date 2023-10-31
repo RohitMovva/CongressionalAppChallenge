@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Proza+Libre&display=swap');
 
-.invert {
-    filter: invert(100%);
-}
-
 :root {
     --schdTwo: 0;
 }
@@ -334,7 +330,7 @@ footer {
 /* Form stuff */
 
 #cform {
-    background-color: #E04852; 
+    background-color: #E04852;
 }
 
 #formpart2 {
@@ -784,9 +780,25 @@ body:has(#main) {
     color: black;
     list-style: none;
 }
-.attgrid{
+
+.attgrid {
     display: grid;
     grid-template-columns: auto auto;
     margin: 100px;
-    
+
+}
+
+a.sendhelp {
+    text-decoration: none;
+    display: grid;
+    place-items: center;
+}
+
+a.sendhelp h4 {
+    background-color: #E0DFD1;
+    padding: 15px;
+    border-radius: 20px;
+    width: fit-content;
+    color: black;
+    font-size: 1.5rem;
 }
