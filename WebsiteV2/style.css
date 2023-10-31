@@ -775,17 +775,22 @@ body:has(#main) {
 }
 
 .attribute {
-    background-color: white;
-    margin: 20px;
-    color: black;
-    list-style: none;
+    background-color: #f7f7f7;
+    border-radius: 30px;
+    list-style:none;
+    width: 20vw;
+    height: 30vh;
+    padding-right:2vw;
 }
 
 .attgrid {
     display: grid;
-    grid-template-columns: auto auto;
-    margin: 100px;
-
+    grid-template-columns: auto auto auto auto;
+    margin: 50px;
+    text-align: center;
+    place-items:center;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 a.sendhelp {
