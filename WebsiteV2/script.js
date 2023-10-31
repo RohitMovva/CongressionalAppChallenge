@@ -168,10 +168,11 @@ function loadDashboard(){
                         curritem.classList.add("moved");
                     }
                     var curritemv2 = curritem.cloneNode(true);
-                    curritemv2.classlist = "";
+                    curritemv2.classList = "";
+                    console.log(curritemv2);
                     var periodv2 = period.cloneNode(true);
                     var periodLabelv2 = periodLabel.cloneNode(true);
-                    periodLabelv2.classlist = "";
+                    periodLabelv2.classList = "";
                     var classNamev2 = className.cloneNode(true);
                     var teacherNamev2 = teacherName.cloneNode(true);
                     var roomNumv2 = roomNum.cloneNode(true);
@@ -223,7 +224,6 @@ function loadDashboard(){
 
                 var expand_button = document.createElement("button");
                 expand_button.classList.add("collapsible");
-                console.log(schedules[0][i][8]);
                 expand_button.innerText = "Changed on " + schedules[0][i][8];
                 var expand_button_label = document.createElement("span");
                 expand_button_label.classList.add("plus")
@@ -590,13 +590,13 @@ if (loginForm != null) {
                 if (data.code == 0) {
                     document.getElementById("error").innerHTML = "Invalid username or password";
                     entriesv2.forEach((entry) => {
-                        entry.target.classList.add('showv2');
+                        entry.target.classList.remove('hiddenv2');
                     });
                     return;
                 }
                 id = data.id;
                 localStorage.setItem("id", id);
-                document.location.href = "index.html";
+                document.location.href = "dashboard.html";
             })
             .catch(error => {
                 console.error('Error', error);
@@ -649,7 +649,7 @@ if (signupForm != null) {
                 id = data.id;
                 // Store
                 localStorage.setItem("id", id);
-                document.location.href = "index.html";
+                document.location.href = "dashboard.html";
 
 
             })
@@ -679,7 +679,7 @@ function loadDropdowns(){
             .then(response => response.json())
                 .then((data) => {
                     if (data.code == -1){
-                        document.location.href = "index.html";
+                        document.location.href = "login.html";
                     }
                     document.getElementById('submit_info');
                     var curr_field = document.getElementById("period" + (i+1));
