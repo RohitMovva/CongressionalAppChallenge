@@ -444,6 +444,7 @@ csvFile.onchange = function () {
     reader.onload = function (e) {
         const text = e.target.result;
         datar = text;
+        console.log(datar);
         fetch(`http://127.0.0.1:5000/api/upload-form`, {
             method: 'POST',
             headers: {
