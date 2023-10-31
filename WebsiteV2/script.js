@@ -618,16 +618,12 @@ if (signupForm != null) {
         const repeated_password = document.getElementById("rlname").value;
         if (username == "" || password == "" || repeated_password == "") {
             document.getElementById("error").innerHTML = "Please fill out all fields!";
-            entriesv2.forEach((entry) => {
-                entry.target.classList.add('showv2');
-            });
+            document.getElementById("error").classList.remove('hiddenv2');
             return;
         }
         if (password != repeated_password) {
             document.getElementById("error").innerHTML = "Passwords do not match!";
-            entriesv2.forEach((entry) => {
-                entry.target.classList.add('showv2');
-            });
+            document.getElementById("error").classList.remove('hiddenv2');
             return;
         }
         fetch('http://127.0.0.1:5000/api/create-account', {
@@ -638,17 +634,16 @@ if (signupForm != null) {
             body: JSON.stringify({
                 "username": username,
                 "password": password,
-                // "repeated_password": repeated_password,
                 "id": id
             }),
         })
             .then(response => response.json())
             .then((data) => {
+                console.log(data.code);
                 if (data.code == -1) {
                     document.getElementById("error").innerHTML = "Username already in use!";
-                    entriesv2.forEach((entry) => {
-                        entry.target.classList.add('showv2');
-                    });
+                    document.getElementById("error").classList.remove("hidden");
+                    document.getElementById("error").classList.remove("hiddenv2");
                     return;
                 }
                 id = data.id;
