@@ -225,7 +225,7 @@ function loadDashboard(){
                 var expand_button = document.createElement("button");
                 expand_button.classList.add("collapsible");
                 console.log(schedules[0][i][8]);
-                expand_button.innerText = "Created at: " + schedules[0][i][8];
+                expand_button.innerText = "Changed on " + schedules[0][i][8];
                 var expand_button_label = document.createElement("span");
                 expand_button_label.classList.add("plus")
                 expand_button_label.classList.add("accent")
