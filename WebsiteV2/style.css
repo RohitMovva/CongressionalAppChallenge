@@ -779,14 +779,16 @@ body:has(#main) {
     border-radius: 30px;
     list-style:none;
     width: 20vw;
-    height: 30vh;
+    height: 35vh;
     padding-right:2vw;
 }
 
 .attgrid {
     display: grid;
+    row-gap:8vh;
     grid-template-columns: auto auto auto auto;
     margin: 50px;
+    margin-top:40px;
     text-align: center;
     place-items:center;
     overflow-x: auto;
