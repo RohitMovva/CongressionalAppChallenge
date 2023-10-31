@@ -151,7 +151,7 @@ function loadDashboard(){
                 let sched_container = document.createElement("div");
                 let changed_table = document.createElement("table");
                 let original_table = document.createElement("table");
-                for (let j = 0; j < schedules[0][i].length; j++){
+                for (let j = 0; j < 8; j++){
                     let curritem = document.createElement("tr");
                     var period = document.createElement("td");
                     var periodLabel = document.createElement("h3");
@@ -165,7 +165,7 @@ function loadDashboard(){
                     if (schedules[0][i][j][0] == "added"){
                         curritem.classList.add("added");
                     } else if (schedules[0][i][j][0] == "changed"){
-                        periodLabel.classList.add("moved");
+                        curritem.classList.add("moved");
                     }
                     var curritemv2 = curritem.cloneNode(true);
                     curritemv2.classlist = "";
@@ -183,7 +183,9 @@ function loadDashboard(){
                     console.log(schedules[1][i][j][0])
                     if (schedules[1][i][j][0] == "dropped"){
                         curritemv2.classList.add("removed");
-                        console.log(periodLabelv2);
+                    } else if (schedules[1][i][j][0] == "changed"){
+                        curritemv2.classList.add("moved");
+
                     }
 
                     period.appendChild(periodLabel);
@@ -221,15 +223,14 @@ function loadDashboard(){
 
                 var expand_button = document.createElement("button");
                 expand_button.classList.add("collapsible");
-                expand_button.innerText = "Testing...";
+                console.log(schedules[0][i][8]);
+                expand_button.innerText = "Changed on " + schedules[0][i][8];
                 var expand_button_label = document.createElement("span");
                 expand_button_label.classList.add("plus")
                 expand_button_label.classList.add("accent")
                 expand_button_label.innerText = "+";
                 
-
                 expand_button.appendChild(expand_button_label);
-
 
                 var labeltest = document.createElement("div");
                 labeltest.innerText = "send help";
@@ -453,7 +454,7 @@ csvFile.onchange = function () {
             .then(response => response.json())
             .then(data => {
                 if (data.code == 0) {
-                    // document.location.href = "login.html";
+                    document.location.href = "login.html";
                     return;
                 }
                 // entriesv2.forEach((entry) => {
