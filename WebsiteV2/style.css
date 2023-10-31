@@ -404,7 +404,11 @@ footer {
     visibility: hidden;
 }
 
-.file::file-selector-button {
+.file.file::file-selector-button {
+    visibility: hidden;
+}
+
+.file::file-selector-button::before {
     content: 'Upload Class List to Continue';
     font-family: 'Poppins';
     background-color: #f1f1f1;
