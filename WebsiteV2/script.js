@@ -100,8 +100,10 @@ function loadDashboard(){
                 var new_row = document.createElement("tr");
 
                 var period = document.createElement("td");
+                period.classList.add("moved");
                 var periodText = document.createElement("h3");
                 periodText.innerText = Number(i)+1;
+                // periodText.classList.add("moved");
                 period.appendChild(periodText);
                 new_row.appendChild(period);
 
