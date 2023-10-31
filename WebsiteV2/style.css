@@ -142,13 +142,13 @@ header {
     margin: auto;
     grid-template-columns: 40% 40%;
     column-gap: 20%;
-    height: 88vh;
+    min-height: 88vh;
     place-items: center;
 }
 
 header img {
     width: 100%;
-    min-width: 390px;
+    padding-top: 20px;
     height: auto;
 }
 
@@ -330,7 +330,7 @@ footer {
 /* Form stuff */
 
 #cform {
-    background-color: #E04852; 
+    background-color: #E04852;
 }
 
 #formpart2 {
@@ -679,7 +679,7 @@ table h3 {
     color: #4D9078;
 }
 
-.moved {
+.moved h3 {
     color: #3C91E6;
 }
 
@@ -791,4 +791,19 @@ body:has(#main) {
     place-items:center;
     overflow-x: auto;
     overflow-y: auto;
+}
+
+a.sendhelp {
+    text-decoration: none;
+    display: grid;
+    place-items: center;
+}
+
+a.sendhelp h4 {
+    background-color: #E0DFD1;
+    padding: 15px;
+    border-radius: 20px;
+    width: fit-content;
+    color: black;
+    font-size: 1.5rem;
 }
