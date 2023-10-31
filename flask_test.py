@@ -86,7 +86,7 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     timestamp = date.today()
     date_time = timestamp.strftime("%m/%d/%Y") + " at " + timestamp.strftime("%H:%M") 
 
-    strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
+    # strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
     past_schedules[username].append((all_info, new_schedule, date_time))
     save_object("past_schedules.pkl", past_schedules)
     return new_schedule

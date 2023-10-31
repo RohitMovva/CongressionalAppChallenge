@@ -151,7 +151,7 @@ function loadDashboard(){
                 let sched_container = document.createElement("div");
                 let changed_table = document.createElement("table");
                 let original_table = document.createElement("table");
-                for (let j = 0; j < schedules[0][i].length; j++){
+                for (let j = 0; j < 8; j++){
                     let curritem = document.createElement("tr");
                     var period = document.createElement("td");
                     var periodLabel = document.createElement("h3");
