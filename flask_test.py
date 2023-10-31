@@ -86,7 +86,6 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     timestamp = date.today()
     # timestamp.
     date_time = timestamp.strftime("%m/%d/%Y")
-    print(date_time)
     # strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
     past_schedules[username].append((all_info, new_schedule, date_time))
     save_object("past_schedules.pkl", past_schedules)
@@ -199,7 +198,35 @@ def get_latest_schedule():
     latest_schedule = load_object("past_schedules.pkl")
     if (latest_schedule == None or len(latest_schedule) == 0):
         return jsonify({"code": 0})
-    return jsonify({"code": 1, "schedule": latest_schedule[username][-1][1]})
+    parsed_schedule = []
+    for i in range(0, 8):
+        if (type(i) == str):
+            continue
+        
+        # print("curr", latest_schedule[username][-1][0][i])
+        latest_schedule[username][-1][0][i] = latest_schedule[username][-1][0][i][0:4]
+        print("curr", latest_schedule[username][-1][1][i])
+        flaggy = False
+        for k in latest_schedule[username][-1][0]:
+            # print(k[0], latest_schedule[username][-1][0][i][0])
+            if k[0] == latest_schedule[username][-1][1][i][0]:
+                flaggy = True
+        print(flaggy)
+
+        # flaggyv2 = False
+        # for k in i[0]:
+        #     if k[0] == i[1][j][0]:
+        #         flaggyv2 = True
+
+        if (not flaggy):
+            parsed_schedule.append(("added",  latest_schedule[username][-1][1][i]))
+        elif (latest_schedule[username][-1][1][i][0] == latest_schedule[username][-1][0][i][0]):
+            parsed_schedule.append(("original",  latest_schedule[username][-1][1][i]))
+        else:
+            parsed_schedule.append(("changed",  latest_schedule[username][-1][1][i]))
+
+    print(parsed_schedule)
+    return jsonify({"code": 1, "schedule": parsed_schedule})
 
 @app.route("/api/get-schedules", methods=['Post'])
 def get_schedules():
@@ -219,12 +246,8 @@ def get_schedules():
     for i in latest_schedule[username]:
         parsed_schedules[0].append([])
         parsed_schedules[1].append([])
-        print(i[0])
-        print(i[1])
         for j in range (0, 8):
             i[0][j] = i[0][j][0:4]
-            print(i[0][j], i[1][j])
-            # () if [x[0] == i[0][j] for x in i[1]] else print("nope")
             flaggy = False
             for k in i[1]:
                 if k[0] == i[0][j][0]:
@@ -236,7 +259,6 @@ def get_schedules():
                     flaggyv2 = True
 
             if (not flaggy):
-                print("0")
                 parsed_schedules[1][-1].append(("dropped", i[0][j]))
             # if (i[0][j] not in i[1]):
 
@@ -253,7 +275,6 @@ def get_schedules():
                 parsed_schedules[0][-1].append(("same", i[1][j]))
         parsed_schedules[0][-1].append(i[2])
         parsed_schedules[1][-1].append(i[2])
-    print(parsed_schedules)
     return jsonify({"code": 1, "schedules": parsed_schedules})
 
 @app.route("/api/get-courses-in-period", methods=['Post'])

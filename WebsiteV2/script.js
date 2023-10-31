@@ -100,16 +100,21 @@ function loadDashboard(){
                 var new_row = document.createElement("tr");
 
                 var period = document.createElement("td");
-                period.classList.add("moved");
+                // period.classList.add("moved");
                 var periodText = document.createElement("h3");
                 periodText.innerText = Number(i)+1;
+                if (data.schedule[i][0] == "changed"){
+                    period.classList.add("moved");
+                } else if (data.schedule[i][0] == "added"){
+                    period.classList.add("added");
+                }
                 // periodText.classList.add("moved");
                 period.appendChild(periodText);
                 new_row.appendChild(period);
 
                 for (let j = 0; j < 3; j++){
                     let currinfo = document.createElement("td");
-                    currinfo.innerHTML = data.schedule[i][j];
+                    currinfo.innerHTML = data.schedule[i][1][j];
                     new_row.appendChild(currinfo);
                 }
 
