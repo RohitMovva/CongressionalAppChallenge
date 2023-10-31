@@ -203,20 +203,11 @@ def get_latest_schedule():
         if (type(i) == str):
             continue
         
-        # print("curr", latest_schedule[username][-1][0][i])
         latest_schedule[username][-1][0][i] = latest_schedule[username][-1][0][i][0:4]
-        print("curr", latest_schedule[username][-1][1][i])
         flaggy = False
         for k in latest_schedule[username][-1][0]:
-            # print(k[0], latest_schedule[username][-1][0][i][0])
             if k[0] == latest_schedule[username][-1][1][i][0]:
                 flaggy = True
-        print(flaggy)
-
-        # flaggyv2 = False
-        # for k in i[0]:
-        #     if k[0] == i[1][j][0]:
-        #         flaggyv2 = True
 
         if (not flaggy):
             parsed_schedule.append(("added",  latest_schedule[username][-1][1][i]))
@@ -225,7 +216,6 @@ def get_latest_schedule():
         else:
             parsed_schedule.append(("changed",  latest_schedule[username][-1][1][i]))
 
-    print(parsed_schedule)
     return jsonify({"code": 1, "schedule": parsed_schedule})
 
 @app.route("/api/get-schedules", methods=['Post'])

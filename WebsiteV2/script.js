@@ -176,7 +176,6 @@ function loadDashboard(){
                     }
                     var curritemv2 = curritem.cloneNode(true);
                     curritemv2.classList = "";
-                    console.log(curritemv2);
                     var periodv2 = period.cloneNode(true);
                     var periodLabelv2 = periodLabel.cloneNode(true);
                     periodLabelv2.classList = "";
@@ -188,7 +187,6 @@ function loadDashboard(){
                         teacherNamev2.innerText = schedules[1][i][j][1][1];
                         roomNumv2.innerText = schedules[1][i][j][1][2];
                     }
-                    console.log(schedules[1][i][j][0])
                     if (schedules[1][i][j][0] == "dropped"){
                         curritemv2.classList.add("removed");
                     } else if (schedules[1][i][j][0] == "changed"){
