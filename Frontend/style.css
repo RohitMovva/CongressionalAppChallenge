@@ -528,7 +528,7 @@ form.loginform {
     background-color: #E0DFD1;
     border-style: none;
     padding: 10px;
-    margin: 0;
+    margin-top: 10px;
     font-family: 'Poppins';
     font-size: 1rem;
     transition: 200ms;
@@ -538,6 +538,17 @@ form.loginform {
     transition: 200ms;
     font-size: 110%;
     cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #000000;
+    transition: background-color 5s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #ffffff;
+    color: #000000;
 }
 
 .input-box {
