@@ -1,4 +1,3 @@
-# from WebsiteV2.bruteForceShortestPath import getPath
 import random
 import sys
 from flask import Flask, jsonify, request
@@ -16,14 +15,12 @@ def load_object(filename):
         return None
 
 def save_object(filename, data):
-    # data = sorted(data, key = lambda x: x[4], reverse=True)
     try:
         with open(filename, "wb") as f:
             return pickle.dump(data, f)
     except Exception as ex:
         return None
 
-# new_schedule = [-1 for _ in range(8)]
 def shortestPath(classes, schedule, original_schedule, new_schedule):
     n = len(schedule)
     if (n == 0):
@@ -32,8 +29,6 @@ def shortestPath(classes, schedule, original_schedule, new_schedule):
     lowval = 100000
     class_loc = -1
     period = -1
-    # i = 8-n
-    # new_schedule.append("-1")
     for i in range(0, 8):
         for j in range (0, len(classes[i])):
             if (classes[i][j][0] == schedule[0] and new_schedule[i] == -1):
@@ -56,26 +51,23 @@ def shortestPath(classes, schedule, original_schedule, new_schedule):
 
     if (class_loc == -1):
         return (new_schedule, 1000000)
-    if (original_schedule[period] != classes[period][class_loc][0]): # original_schedule[period] != -1 and 
+    if (original_schedule[period] != classes[period][class_loc][0]):
         lowval += 1
 
     return (new_schedule, lowval)
 
 def getPath(classes, schedule, added_class, dropped_class, username):
-    # new_schedule = [-1 for _ in range(8)]
     only_classes = []
     all_info = []
     for i in schedule:
         subthing = i.split(", ")
         only_classes.append(subthing[0])
-        # all_info.append(classes.index)
         for j in classes[int(subthing[2])]:
             if j[1][0] == subthing[0] and j[1][1] == subthing[1]:
                 all_info.append(j[1])
                 break
 
     only_classes[only_classes.index(dropped_class)] = added_class
-    # new_schedule = [-1 for _ in range(8)]
     new_schedule = shortestPath(classes, only_classes, only_classes, [-1 for _ in range(8)])[0]
     if (-1 in new_schedule):
         return new_schedule
@@ -86,9 +78,7 @@ def getPath(classes, schedule, added_class, dropped_class, username):
     if (username not in past_schedules):
         past_schedules[username] = []
     timestamp = date.today()
-    # timestamp.
     date_time = timestamp.strftime("%m/%d/%Y")
-    # strstamp = str(timestamp.year) + "/ " + str(timestamp.month) + "/ " + str(timestamp.day) + " at " + str(timestamp.hour) + ":" + str(timestamp.min)
     past_schedules[username].append((all_info, new_schedule, date_time))
     save_object("past_schedules.pkl", past_schedules)
     return new_schedule
@@ -118,7 +108,6 @@ def upload_form():
         return jsonify({"code": 0, "message": "Failure!"})
     if (int(request.get_json()["id"]) != id or request.get_json()["id"] == -1):
         return jsonify({"code": 0, "message": "Failure!"})
-    # data = request.get_json()
     name = request.get_json()["file_text"]
     return jsonify({"code": 1, "message": "Success!", "class_list": process_form(name)})
 
@@ -135,18 +124,11 @@ def get_shortest_switches():
     class_list = [[] for _ in range(8)]
     for line in raw_class_list.split("\n")[1:]:
         line = line.split(",")
-        # if (int(line[4]) < int(line[5][:-1])): # 4 5
         class_list[int(line[3])-1].append(((line[0], line)))
     student_schedule = request.get_json()['schedule']
     added_course = request.get_json()['added_course']
     dropped_course = request.get_json()['dropped_course']
-    # getPath(class_list, student_schedule, added_course, dropped_course)
     new_schedule = getPath(class_list, student_schedule, added_course, dropped_course, username)
-    # schedule = new_schedule
-    # new_schedule = [-1 for _ in range(8)]
-    # new_schedule = new_schedule
-    # new_schedule = [-1 for _ in range(8)]
-    # new_schedule = [i[1][0:4] for i in new_schedule]
     print(new_schedule)
     if (-1 in new_schedule):
         return jsonify({"code": -1, "message": "Success!", "new_schedule": new_schedule})
@@ -154,7 +136,6 @@ def get_shortest_switches():
 
 @app.route('/api/create-account', methods=['POST'])
 def create_account():
-    # request = request
     username = request.get_json()['username']
     password = request.get_json()['password']
     account_dict = load_object("account_credentials")
@@ -189,11 +170,9 @@ def verify_id():
         return jsonify({"valid": False})
     else:
         return jsonify({"valid": int(id[0])==int(frontend_id)})
-    # return jsonify({"valid": id == frontend_id})
 
 @app.route("/api/latest-schedule", methods=['POST'])
 def get_latest_schedule():
-    # return jsonify({"code": -1})
     frontend_id = request.get_json()['id']
     id = load_object("id.pkl")
     if (id == None or int(id[0]) != int(frontend_id)):
@@ -236,7 +215,6 @@ def get_schedules():
         return jsonify({"code": 0})
     parsed_schedules = [[], []]
     latest_schedule[username].reverse()
-    # parsed_sched)
     
     for i in latest_schedule[username]:
         parsed_schedules[0].append([])
@@ -255,7 +233,6 @@ def get_schedules():
 
             if (not flaggy):
                 parsed_schedules[1][-1].append(("dropped", i[0][j]))
-            # if (i[0][j] not in i[1]):
 
             elif (i[0][j] == i[1][j]):
                 parsed_schedules[1][-1].append(("original", i[0][j]))
@@ -288,4 +265,3 @@ def get_courses():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    #test test

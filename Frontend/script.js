@@ -100,7 +100,6 @@ function loadDashboard(){
                 var new_row = document.createElement("tr");
 
                 var period = document.createElement("td");
-                // period.classList.add("moved");
                 var periodText = document.createElement("h3");
                 periodText.innerText = Number(i)+1;
                 if (data.schedule[i][0] == "changed"){
@@ -108,7 +107,6 @@ function loadDashboard(){
                 } else if (data.schedule[i][0] == "added"){
                     period.classList.add("added");
                 }
-                // periodText.classList.add("moved");
                 period.appendChild(periodText);
                 new_row.appendChild(period);
 
@@ -146,13 +144,11 @@ function loadDashboard(){
                 schedules_container.appendChild(error_label);
                 return;
             } else if (data.code == "0"){
-                // schedule_container = document.getElementById("latest_schedule");
                 let error_label = document.createElement('label');
                 error_label.innerText = "You haven't generated a schedule change yet!";
                 schedules_container.appendChild(error_label);
                 return;
             }
-            // let masterContainer = document.getElementById("schedulesContainer");
             let schedules = data.schedules
             for (let i = 0; i < schedules[0].length; i++){
                 let sched_container = document.createElement("div");
@@ -222,10 +218,11 @@ function loadDashboard(){
                 sched_container.appendChild(original_table);
 
                 sched_container.classList.add("x-scroll");
-                // sched_container.classList.push("x-scroll");
                 var sched_wrapper = document.createElement("div");
                 sched_wrapper.classList.add("collapsible-content");
                 sched_wrapper.appendChild(sched_container);
+                
+                sched_wrapper.style.borderBottom = "1px solid black";
 
                 var expand_button = document.createElement("button");
                 expand_button.classList.add("collapsible");
@@ -248,7 +245,6 @@ function loadDashboard(){
             }
 
 
-            // schedule_container = document.getElementById("latest_schedule");
             data.schedules.forEach(function (schedule, i) {
             const schedule_table = document.createElement("table");
             schedule.forEach(function (item, j) {
@@ -259,10 +255,6 @@ function loadDashboard(){
             console.error('Error', error);
             return false;
         });
-
-
-
-
 }
 
 function loadForm(){
@@ -289,7 +281,6 @@ function loadForm(){
 }
 
 var pastSheds = 4;
-// past schedules times two
 function getPastSchedulesTimesTwo() {
     return pastSheds;
 }
@@ -297,7 +288,6 @@ function getPastSchedulesTimesTwo() {
 var coll = document.getElementsByClassName("collapsible");
 collapse_init(coll);
 
-// colapsible 
 function collapse_init(coll){
     var i;
 
@@ -324,47 +314,6 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidebar").classList.toggle("openSidebar");
 }
-
-// js for dropzone
-
-// document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-//     const dropZoneElement = inputElement.closest(".drop-zone");
-
-//     dropZoneElement.addEventListener("click", function(e) {
-//         e.preventDefault();
-//         inputElement.click();
-//     });
-
-//     inputElement.addEventListener("change", function(e) {
-//         e.preventDefault();
-//         if (inputElement.files.length) {
-//             updateThumbnail(dropZoneElement, inputElement.files[0]);
-//         }
-//     });
-
-//     dropZoneElement.addEventListener("dragover", function(e) {
-//         e.preventDefault();
-//         dropZoneElement.classList.add("drop-zone--over");
-//     });
-
-//     ["dragleave", "dragend"].forEach((type) => {
-//         dropZoneElement.addEventListener(type, (e) => {
-//             e.preventDefault();
-//             dropZoneElement.classList.remove("drop-zone--over");
-//         });
-//     });
-
-//     dropZoneElement.addEventListener("drop", function(e) {
-//         e.preventDefault();
-
-//         if (e.dataTransfer.files.length) {
-//             inputElement.files = e.dataTransfer.files;
-//             updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-//         }
-
-//         dropZoneElement.classList.remove("drop-zone--over");
-//     });
-// });
 
 /**
  * Updates the thumbnail on a drop zone element.
@@ -422,23 +371,16 @@ const myFunction = function (entries) {
 if (csvFile == null) {
     csvFile = -1;
 }
-
-// if (myForm == null){
-//     myForm = -1;
-// }
 var classes = [];
 var datar = "";
 
 csvFile.onchange = function () {
-    // e.preventDefault();
-    // csvFile.classList.add("greenBorder");
     csvFile.classList.remove("file");
     csvFile.classList.add("hiddenv2");
     csvFile.nextSibling.nextSibling.classList.remove("hiddenv2");
     if (id == null){
         document.location.href = "login.html";
         return;
-        // document.getElementById("response").innerText = "Error fetching data!";
     }
     
     const input = csvFile.files[0];
@@ -462,9 +404,6 @@ csvFile.onchange = function () {
                     document.location.href = "login.html";
                     return;
                 }
-                // entriesv2.forEach((entry) => {
-                //     entry.target.classList.toggle('showv2');
-                // });
                 entriesv2.forEach((entry) => {
                     entry.target.classList.add('showv2');
                 });
@@ -498,29 +437,12 @@ if (submitInfo != null) {
         const added_course = document.querySelector('#added_course').value;
         const dropped_course = document.querySelector('#dropped_course').value;
         const class_list = datar;
-        // for (let i = 0; i < 8; i++){
-        //     if (document.querySelector("#period" + (i+1) == "Select Class")){
-        //         document.getElementById("result") = "Please fill out all fields";
-        //         return;
-        //     }
-        //     class_list.push(document.querySelector("#period" + (i+1)).value)
-        // }
-        // const schedule = [];
-
-        // const optcontainer = document.getElementById("checkboxes");
-        // for (const i of optcontainer.childNodes) {
-        //     if (!i.childNodes[1].checked) {
-        //         continue;
-        //     }
-        //     schedule.push(i.childNodes[0].wholeText);
-        // }
 
         const schedule = [document.getElementById("period1").value, document.getElementById("period2").value, document.getElementById("period3").value,
         document.getElementById("period4").value, document.getElementById("period5").value, document.getElementById("period6").value,
         document.getElementById("period7").value, document.getElementById("period8").value];
 
         for (i = 0; i < schedule.length; i++){
-            // schedule[i] = schedule[i].split(", ", 1);
             if (schedule[i] == "Select Class"){
                 document.getElementById("result").innerText = "Please select all courses!";
                 return;
@@ -554,22 +476,12 @@ if (submitInfo != null) {
                 } else {
                     document.location.href = "dashboard.html";
                 }
-                // const new_schedule = data.new_schedule;
-                // const schedule_container = document.getElementById("schedule_container");
-                // schedule_container.innerHTML = '';
-                // for (i = 0; i < 8; i++) {
-                //     let label = document.createElement('p');
-                //     label.innerHTML = new_schedule[i];
-                //     schedule_container.appendChild(label);
-                // }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
     });
 }
-
-// account stuff 
 
 if (loginForm != null) {
     loginForm.addEventListener("submit", function (e) {
@@ -653,7 +565,6 @@ if (signupForm != null) {
                     return;
                 }
                 id = data.id;
-                // Store
                 localStorage.setItem("id", id);
                 document.location.href = "dashboard.html";
 
