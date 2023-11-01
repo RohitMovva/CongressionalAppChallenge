@@ -147,7 +147,6 @@ def get_shortest_switches():
     # new_schedule = new_schedule
     # new_schedule = [-1 for _ in range(8)]
     # new_schedule = [i[1][0:4] for i in new_schedule]
-    print(new_schedule)
     if (-1 in new_schedule):
         return jsonify({"code": -1, "message": "Success!", "new_schedule": new_schedule})
     return jsonify({"code": 1, "message": "Success!", "new_schedule": new_schedule})
