@@ -138,13 +138,13 @@ def get_shortest_switches():
 def create_account():
     username = request.get_json()['username']
     password = request.get_json()['password']
-    account_dict = load_object("account_credentials")
+    account_dict = load_object("account_credentials.pkl")
     if (account_dict == None):
         account_dict = {}
     if (username in account_dict):
         return jsonify({"code": -1, "id": -1})
     account_dict[username] = password
-    save_object("account_credentials", account_dict)
+    save_object("account_credentials.pkl", account_dict)
     id = random.randint(10000000, 99999999)
     save_object("id.pkl", [id, username])
     return jsonify({"code": 1, "id": id})
@@ -153,7 +153,7 @@ def create_account():
 def login():
     username = request.get_json()['username']
     password = request.get_json()['password']
-    account_dict = load_object("account_credentials")
+    account_dict = load_object("account_credentials.pkl")
     if (account_dict == None):
         account_dict = {}
     if (username not in account_dict or account_dict[username] != password):
@@ -168,17 +168,20 @@ def verify_id():
     id = load_object("id.pkl")
     if (id == None):
         return jsonify({"valid": False})
-    else:
-        return jsonify({"valid": int(id[0])==int(frontend_id)})
+    id = id[0]
+    return jsonify({"valid": int(id)==int(frontend_id)})
 
 @app.route("/api/latest-schedule", methods=['POST'])
 def get_latest_schedule():
     frontend_id = request.get_json()['id']
     id = load_object("id.pkl")
-    if (id == None or int(id[0]) != int(frontend_id)):
+    if (id == None):
         return jsonify({"code": -1})
     username = id[1]
     id = id[0]
+    if (int(id) != int(frontend_id)):
+        return jsonify({"code": -1})
+    
     latest_schedule = load_object("past_schedules.pkl")
     if (latest_schedule == None or len(latest_schedule) == 0):
         return jsonify({"code": 0})
