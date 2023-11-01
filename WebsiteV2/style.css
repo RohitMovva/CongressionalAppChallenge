@@ -508,7 +508,7 @@ p.error {
     color: #f3bb1b;
     background-color: #fff8e4;
     border-radius: 30px;
-    padding: 3px;
+    padding: 10px;
     text-align: center;
     border: 1px solid #f3bb1b;
 }
