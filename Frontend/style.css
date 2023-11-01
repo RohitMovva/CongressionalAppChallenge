@@ -634,13 +634,6 @@ div.rounded-box a img {
     font-size: 1rem;
     line-height: 1rem;
 }
-
-/* .collapsible:nth-child(-n + 3):not(.active) {
-    /* Rohit, 4 needs to be a var which is number of past schedules * 2 - 1 */
-    /* border-bottom: 1px solid black; */
-    
-/* } */ */
-
 .active .plus,
 .collapsible:hover .plus {
     transform: rotate(135deg);
@@ -733,15 +726,6 @@ td {
 tr:nth-child(-n + 7) td {
     border-bottom: 1px solid black;
 }
-
-/* tr.added td {
-    border-bottom: 3px solid #E04852;
-}
-
-tr.added:last-child td {
-    border-top: #E04852;
-    border-bottom: none;
-} */
 
 @media screen and (max-width: 1200px) {
     .openSidebar {
